@@ -1,6 +1,6 @@
 import { RouterModule, Route } from "@angular/router";
 import { NgModule } from "@angular/core";
-import { ItemsComponent } from "./pages/items/items.component";
+import { ItemsComponent } from "./pages";
 
 export const routes: Route[] = [
   { path: '', component: ItemsComponent }

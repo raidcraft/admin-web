@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ItemsService } from '../../services/items.service';
+import { MatDialog } from '@angular/material';
+import { CreateItemDialogComponent } from '../../components';
 
 @Component({
   selector: 'rci-items',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public items: ItemsService, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
+  openCreateItemDialog() {
+    this.dialog.open(CreateItemDialogComponent);
+  }
 }

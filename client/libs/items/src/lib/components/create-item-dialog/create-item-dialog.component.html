@@ -1,0 +1,16 @@
+<mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <mat-tab-group>
+      <mat-tab label="Allgemein">
+        <rci-edit-item-general [formGroup]="formGroup.get('general')" #general></rci-edit-item-general>
+      </mat-tab>
+      <mat-tab label="Eigenschaften">
+        <rci-edit-item-properties [formGroup]="formGroup.get('properties')" #properties></rci-edit-item-properties>
+      </mat-tab>
+    </mat-tab-group>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" [disabled]="formGroup.invalid">Speichern</button>
+  <button mat-button mat-dialog-close>Abbrechen</button>
+</mat-dialog-actions>

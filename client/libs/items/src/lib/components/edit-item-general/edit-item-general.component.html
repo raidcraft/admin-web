@@ -1,0 +1,28 @@
+<form [formGroup]="formGroup" fxLayout="column wrap">
+  <mat-form-field>
+    <input matInput type="text" formControlName="name" placeholder="Custom Item Name">
+    <mat-hint>Der Name ersetzt den eigentlichen Namen des Items.</mat-hint>
+    <mat-error>Bitte gebe einen Namen für das Item an.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="minecraftItem" placeholder="Minecraft Item">
+      <mat-option *ngFor="let minecraftItem of items.minecraftItems$ | async" [value]="minecraftItem.id">
+        {{ minecraftItem.name }}
+      </mat-option>
+    </mat-select>
+    <mat-hint>Das Minecraft Item gibt das Aussehen des Items vor.</mat-hint>
+    <mat-error>Bitte wähle ein Minecraft Item aus.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="itemType" placeholder="Item Typ">
+      <mat-option *ngFor="let itemType of itemTypes | keys" [value]="itemType">
+        {{ itemTypes[itemType] }}
+      </mat-option>
+    </mat-select>
+    <mat-hint>Der Item Typ definiert spezielle Eigenschaften.</mat-hint>
+    <mat-error>Bitte wähle einen Item Typ aus.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput formControlName="info" placeholder="Kommentar"></textarea>
+  </mat-form-field>
+</form>

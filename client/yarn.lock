@@ -172,6 +172,12 @@
   dependencies:
     tslib "^1.9.0"
 
+"@angular/flex-layout@^6.0.0-beta.16":
+  version "6.0.0-beta.16"
+  resolved "https://registry.yarnpkg.com/@angular/flex-layout/-/flex-layout-6.0.0-beta.16.tgz#e2749c2609743ff4655b09ae8873709c7a62aeae"
+  dependencies:
+    tslib "^1.7.1"
+
 "@angular/forms@6.0.1":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-6.0.1.tgz#8ac4fbcd857a53613e8bcd58127e137d5ff0c98f"
@@ -225,6 +231,30 @@
     "@angular-devkit/core" "0.6.8"
     tree-kill "^1.0.0"
     webpack-sources "^1.1.0"
+
+"@ngxs/devtools-plugin@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@ngxs/devtools-plugin/-/devtools-plugin-3.1.4.tgz#a2173254c47e6734afddc81cb8d729b19f7e8713"
+  dependencies:
+    tslib "^1.9.0"
+
+"@ngxs/form-plugin@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@ngxs/form-plugin/-/form-plugin-3.1.4.tgz#7dd23f614647b317fa081d5b30d8e278a30f9e39"
+  dependencies:
+    tslib "^1.9.0"
+
+"@ngxs/router-plugin@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@ngxs/router-plugin/-/router-plugin-3.1.4.tgz#39044393be3927b2f42cbc56f35d5241e623d077"
+  dependencies:
+    tslib "^1.9.0"
+
+"@ngxs/store@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@ngxs/store/-/store-3.1.4.tgz#dd90d00a3dc10f470a24362dc60ab0ec6c1f00ad"
+  dependencies:
+    tslib "^1.9.0"
 
 "@nrwl/schematics@6.1.0":
   version "6.1.0"
@@ -4843,6 +4873,10 @@ normalize-range@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
 
+normalizr@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/normalizr/-/normalizr-3.2.4.tgz#16aafc540ca99dc1060ceaa1933556322eac4429"
+
 npm-bundled@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/npm-bundled/-/npm-bundled-1.0.3.tgz#7e71703d973af3370a9591bafe3a63aca0be2308"
@@ -7037,6 +7071,10 @@ trim-right@^1.0.1:
   resolved "https://registry.yarnpkg.com/true-case-path/-/true-case-path-1.0.2.tgz#7ec91130924766c7f573be3020c34f8fdfd00d62"
   dependencies:
     glob "^6.0.4"
+
+ts-action@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/ts-action/-/ts-action-6.0.2.tgz#9451cef91faf3aad868de5406209c606ba28128e"
 
 ts-node@~5.0.1:
   version "5.0.1"

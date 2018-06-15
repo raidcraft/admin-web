@@ -1,0 +1,21 @@
+{
+  "npmScope": "faldoria",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "faldoria": {
+      "tags": []
+    },
+    "faldoria-e2e": {
+      "tags": []
+    },
+    "items": {
+      "tags": []
+    }
+  }
+}

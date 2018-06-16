@@ -7,7 +7,7 @@
   <section fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field>
       <mat-select formControlName="minecraftItem" placeholder="Minecraft Item">
-        <mat-option *ngFor="let minecraftItem of items.minecraftItems$ | async" [value]="minecraftItem.id">
+        <mat-option *ngFor="let minecraftItem of items.minecraftItems$ | async" [value]="minecraftItem">
           {{ minecraftItem.name }}
         </mat-option>
       </mat-select>

@@ -37,32 +37,29 @@ export class CreateItemDialogComponent implements OnInit {
 
   saveItem() {
     this.items.createItem(this.buildModel());
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
   buildModel(): RCItem {
-    const data = this.formGroup.value;
+    const form = this.formGroup.value;
+    const data = { ...form.general, ...form.properties };
+
     let item: RCItem;
 
     switch (this.itemType) {
       case ItemType.WEAPON:
-        const weapon = new RCWeapon(this.formGroup.value);
-        item = { ...weapon, ...data.weapon, ...data.attributes, ...data.equipment };
+        item = new RCWeapon({ ...data, ...form.weapon, ...form.attributes, ...form.equipment });
         break;
       case ItemType.ARMOR:
-        const armor = new RCArmor(this.formGroup.value);
-        item = { ...armor, ...data.armor, ...data.attributes, ...data.equipment };
+        item = new RCArmor({ ...data, ...form.armor, ...form.attributes, ...form.equipment });
         break;
       case ItemType.EQUIPMENT:
-        const equipment = new RCEquipment(this.formGroup.value);
-        item = { ...equipment, ...data.equipment, ...data.attributes };
+        item = new RCEquipment({ ...data, ...form.attributes, ...form.equipment });
         break;
       default:
-        item = new RCItem(this.formGroup.value);
+        item = new RCItem(data);
         break;
     }
-
-    item = { ...item, ...data.general, ...data.properties };
 
     return item;
   }

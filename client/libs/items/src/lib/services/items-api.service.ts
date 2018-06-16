@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RCItem } from '../models';
 import { RCITEM_MOCK_DATA } from '../models/item.mock-data';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,14 @@ export class ItemsApiService {
   constructor(private http: HttpClient) { }
 
   getAllItems(): Observable<RCItem[]> {
-    return of(RCITEM_MOCK_DATA);
+    return this.http.get<any[]>(this.BASE_URL).pipe(
+      map(data => data.map(json => new RCItem(json)))
+    );
   }
 
   createItem(item: RCItem): Observable<RCItem> {
-    item.id = ++this.idCount;
-    return of(item);
+    return this.http.post(this.BASE_URL, item.toApiFormat()).pipe(
+      map(data => new RCItem(data))
+    );
   }
 }

@@ -1,8 +1,8 @@
 import { logger } from '@/services';
 import { NextFunction, Request, Response } from 'express';
-import { PingRoute } from './ping';
+import { PlayersRoute } from './players';
 import { BaseRoute } from './route';
-import { UploadRoute } from './upload';
+import { ItemsRoute } from './items';
 
 /**
  * / route
@@ -17,7 +17,7 @@ export class ApiRoutes extends BaseRoute {
    * @class ApiRoutes
    * @constructor
    */
-  private constructor () {
+  private constructor() {
     super();
     this.get = this.get.bind(this);
     this.init();
@@ -28,7 +28,7 @@ export class ApiRoutes extends BaseRoute {
    * @method getRouter
    * @returns {Router}
    */
-  static get router () {
+  static get router() {
     if (!ApiRoutes.instance) {
       ApiRoutes.instance = new ApiRoutes();
     }
@@ -39,14 +39,14 @@ export class ApiRoutes extends BaseRoute {
    * @class ApiRoute
    * @method init
    */
-  private init () {
+  private init() {
     // log
     logger.info('[ApiRoute] Creating api routes.');
 
     // add index page route
     this.router.get('/', this.get);
-    this.router.use(PingRoute.path, PingRoute.router);
-    this.router.use(UploadRoute.path, UploadRoute.router);
+    this.router.use(PlayersRoute.path, PlayersRoute.router);
+    this.router.use(ItemsRoute.path, ItemsRoute.router);
   }
 
   /**
@@ -56,7 +56,7 @@ export class ApiRoutes extends BaseRoute {
    * @param res {Response} The express Response object.
    * @param next {NextFunction} Execute the next method.
    */
-  private async get (req: Request, res: Response, next: NextFunction) {
+  private async get(req: Request, res: Response, next: NextFunction) {
     res.status(200).json({ online: true });
   }
 }

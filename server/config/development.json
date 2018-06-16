@@ -1,0 +1,9 @@
+{
+  "db": {
+    "database": "minecraft",
+    "password": "password",
+    "requestTimeout": 60000,
+    "server": "localhost",
+    "user": "minecraft"
+  }
+}

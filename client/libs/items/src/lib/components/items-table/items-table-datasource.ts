@@ -1,7 +1,7 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
+import { map, tap, withLatestFrom } from 'rxjs/operators';
+import { Observable, of as observableOf, merge, Subscription } from 'rxjs';
 import { RCItem } from '../../models';
 import { Select } from '@ngxs/store';
 import { Injectable } from '@angular/core';
@@ -13,7 +13,7 @@ import { Injectable } from '@angular/core';
  */
 export class ItemsTableDataSource extends DataSource<RCItem> {
 
-  constructor(private data: RCItem[], private paginator: MatPaginator, private sort: MatSort) {
+  constructor(private data$: Observable<RCItem[]>, private paginator: MatPaginator, private sort: MatSort) {
     super();
   }
 
@@ -26,24 +26,22 @@ export class ItemsTableDataSource extends DataSource<RCItem> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
-      observableOf(this.data),
+      this.data$,
       this.paginator.page,
       this.sort.sortChange
     ];
 
-    // Set the paginators length
-    this.paginator.length = this.data.length;
-
-    return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
-    }));
+    return merge(...dataMutations).pipe(
+      tap(data => this.paginator.length = data.length),
+      withLatestFrom(this.data$),
+      map(([i, data]) => this.getPagedData(this.getSortedData([...data]))));
   }
 
   /**
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() { }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,

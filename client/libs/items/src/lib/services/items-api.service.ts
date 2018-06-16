@@ -10,10 +10,16 @@ import { RCITEM_MOCK_DATA } from '../models/item.mock-data';
 export class ItemsApiService {
 
   private readonly BASE_URL = '/api/items';
+  private idCount = RCITEM_MOCK_DATA.length;
 
   constructor(private http: HttpClient) { }
 
   getAllItems(): Observable<RCItem[]> {
     return of(RCITEM_MOCK_DATA);
+  }
+
+  createItem(item: RCItem): Observable<RCItem> {
+    item.id = ++this.idCount;
+    return of(item);
   }
 }

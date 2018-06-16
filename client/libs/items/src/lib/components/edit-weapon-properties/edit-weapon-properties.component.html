@@ -1,0 +1,24 @@
+<h3>Waffen Eigenschaften</h3>
+<mat-divider></mat-divider>
+<div [formGroup]="formGroup" fxLayout="column wrap">
+  <section fyLayout="row" fxLayoutGap="5px">
+    <mat-form-field>
+      <mat-select formControlName="weaponType" placeholder="Waffen Art">
+        <mat-option *ngFor="let type of weaponTypes | keys" [value]="type">
+          {{ weaponTypes[type] }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="swingTime" type="number" placeholder="Geschwindigkeit">
+    </mat-form-field>
+  </section>
+  <section fyLayout="row" fxLayoutGap="5px">
+    <mat-form-field>
+      <input matInput formControlName="minDamage" type="number" placeholder="Min. Damage">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="maxDamage" type="number" placeholder="Max. Damage">
+    </mat-form-field>
+  </section>
+</div>

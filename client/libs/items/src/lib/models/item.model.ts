@@ -133,37 +133,43 @@ export enum ItemQuality {
   LEGENDARY = 'Legendär'
 }
 
-export type EquipmentSlot =
-  'ONE_HANDED'
-  | 'SHIELD_HAND'
-  | 'TWO_HANDED'
-  | 'HEAD'
-  | 'CHEST'
-  | 'LEGS'
-  | 'FEET'
-  | 'HANDS'
-  | 'INVENTORY'
-  | 'UNDEFINED';
+export enum EquipmentSlot {
+  ONE_HANDED = 'Einhändig',
+  SHIELD_HAND = 'Schildhand',
+  TWO_HANDED = 'Zweihändig',
+  HEAD = 'Kopf',
+  CHEST = 'Brust',
+  LEGS = 'Beine',
+  FEET = 'Füße',
+  HANDS = 'Hände',
+  INVENTORY = 'Inventar',
+  UNDEFINED = 'Undefiniert'
+}
 
-export type WeaponType =
-  'SWORD'
-  | 'TWO_HAND_SWORD'
-  | 'DAGGER'
-  | 'AXE'
-  | 'TWO_HAND_AXE'
-  | 'POLEARM'
-  | 'MACE'
-  | 'TWO_HAND_MACE'
-  | 'STAFF'
-  | 'BOW'
-  | 'MAGIC_WAND';
 
-export type ArmorType =
-  'CLOTH'
-  | 'LEATHER'
-  | 'MAIL'
-  | 'PLATE'
-  | 'SHIELD';
+export enum WeaponType {
+  SWORD = 'Schwert',
+  TWO_HAND_SWORD = 'Zweihand Schwert',
+  DAGGER = 'Dolch',
+  AXE = 'Axt',
+  TWO_HAND_AXE = 'Zweihand Axt',
+  POLEARM = 'Stangenwaffe',
+  MACE = 'Streitkolben',
+  TWO_HAND_MACE = 'Zweihand Streitkolben',
+  STAFF = 'Stab',
+  BOW = 'Bogen',
+  MAGIC_WAND = 'Zauberstab'
+}
+
+
+export enum ArmorType {
+  CLOTH = 'Stoff',
+  LEATHER = 'Leder',
+  MAIL = 'Kette',
+  PLATE = 'Platte',
+  SHIELD = 'Schild'
+}
+
 
 export enum AttributeType {
   STRENGTH = 'Stärke',

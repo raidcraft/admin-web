@@ -1,0 +1,16 @@
+<h3>Ausrüstungs Eigenschaften</h3>
+<mat-divider></mat-divider>
+<div [formGroup]="formGroup" fxLayout="column wrap">
+  <section fyLayout="row" fxLayoutGap="5px">
+    <mat-form-field>
+      <mat-select formControlName="equipmentSlot" placeholder="Ausrüstungsslot">
+        <mat-option *ngFor="let slot of equipmentSlots | keys" [value]="slot">
+          {{ equipmentSlots[slot] }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="maxDurability" type="number" placeholder="Haltbarkeit">
+    </mat-form-field>
+  </section>
+</div>

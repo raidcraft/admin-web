@@ -1,10 +1,10 @@
 import { State, StateContext, Action, Selector, NgxsOnInit } from "@ngxs/store";
 import { RCItem, RCItemCategory, MinecraftItem } from "../models";
 import { RCITEM_MOCK_DATA } from "../models/item.mock-data";
-import { LoadMinecraftItemsAction, LoadRaidCraftItemsAction } from "./items.actions";
+import { LoadMinecraftItemsAction, LoadRaidCraftItemsAction, CreateItemActionType, CreateItemAction } from "./items.actions";
 import { MinecraftDataService } from "../services/minecraft-data.service";
 import { normalize, denormalize } from "normalizr";
-import { raidcraftItemsListSchema, minecraftItemsListSchema } from "./items.normalizr";
+import { raidcraftItemsListSchema, minecraftItemsListSchema, raidCraftItemSchema } from "./items.normalizr";
 import { map, tap } from "rxjs/operators";
 import { ItemsApiService } from "../services/items-api.service";
 
@@ -41,7 +41,7 @@ export class ItemsState implements NgxsOnInit {
     return denormalize(Object.keys(state.entities.items), raidcraftItemsListSchema, state.entities);
   }
 
-  constructor(private minecraftData: MinecraftDataService, private itemsApi: ItemsApiService) {}
+  constructor(private minecraftData: MinecraftDataService, private itemsApi: ItemsApiService) { }
 
   ngxsOnInit(ctx: StateContext<ItemsStateModel>) {
 
@@ -63,6 +63,14 @@ export class ItemsState implements NgxsOnInit {
   loadRaidCraftItems(ctx: StateContext<ItemsStateModel>) {
     return this.itemsApi.getAllItems().pipe(
       map(items => normalize(items, raidcraftItemsListSchema)),
+      tap(result => this.updateEntitiesState(ctx, result.entities, 'minecraft_items'))
+    );
+  }
+
+  @Action(CreateItemAction)
+  createItem(ctx: StateContext<ItemsStateModel>, { payload }: typeof CreateItemActionType) {
+    return this.itemsApi.createItem(payload).pipe(
+      map(item => normalize(item, raidCraftItemSchema)),
       tap(result => this.updateEntitiesState(ctx, result.entities, 'minecraft_items'))
     );
   }

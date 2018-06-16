@@ -1,0 +1,16 @@
+<h3>Rüstungs Eigenschaften</h3>
+<mat-divider></mat-divider>
+<div [formGroup]="formGroup" fxLayout="column wrap">
+  <section fyLayout="row" fxLayoutGap="5px">
+    <mat-form-field>
+      <mat-select formControlName="armorType" placeholder="Rüstungstyp">
+        <mat-option *ngFor="let type of armorTypes | keys" [value]="type">
+          {{ armorTypes[type] }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="armorValue" type="number" placeholder="Rüstungswert">
+    </mat-form-field>
+  </section>
+</div>

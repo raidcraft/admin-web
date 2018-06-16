@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { RCItem, ItemType } from '../../models';
+import { Component, OnInit, Input, Host } from '@angular/core';
+import { FormBuilder, Validators, FormGroup, ControlContainer, FormGroupDirective } from '@angular/forms';
+import { RCItem, ItemType, ItemQuality, ItemBindType } from '../../models';
 import { ItemsService } from '../../services';
+import { MatSelectChange } from '@angular/material';
 
 @Component({
   selector: 'rci-edit-item-general',
@@ -10,24 +11,29 @@ import { ItemsService } from '../../services';
 })
 export class EditItemGeneralComponent implements OnInit {
 
-  itemTypes = ItemType;
+  @Input() parentForm: FormGroup;
 
-  @Input() item: RCItem = new RCItem();
-  @Input() formGroup: FormGroup;
+  itemTypes = ItemType;
+  qualities = ItemQuality;
+  bindTypes = ItemBindType;
+  formGroup: FormGroup;
 
   constructor(private fb: FormBuilder,
-    public items: ItemsService) { }
+    public items: ItemsService) {
+  }
 
   ngOnInit() {
-    this.formGroup = this.formGroup || this.initForm();
+    this.parentForm.addControl('general', this.initForm());
+    this.formGroup = this.parentForm.get('general') as FormGroup;
   }
 
   initForm(): FormGroup {
     return this.fb.group({
-      name: this.fb.control(this.item.name || null, Validators.required),
-      minecraftItem: this.fb.control(this.item.minecraftItem ? this.item.minecraftItem.id : null, Validators.required),
-      itemType: this.fb.control(this.item.itemType || null, Validators.required),
-      info: this.fb.control(this.item.info || null)
+      name: this.fb.control('', Validators.required),
+      minecraftItem: this.fb.control(null, Validators.required),
+      quality: this.fb.control(ItemQuality.COMMON),
+      bindType: this.fb.control(ItemBindType.NONE),
+      itemType: this.fb.control(null, Validators.required)
     });
   }
 }

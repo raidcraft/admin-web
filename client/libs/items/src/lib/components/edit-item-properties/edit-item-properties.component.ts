@@ -9,28 +9,26 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EditItemPropertiesComponent implements OnInit {
 
-  @Input() item: RCItem = new RCItem();
-  @Input() formGroup: FormGroup;
+  @Input() parentForm: FormGroup;
 
-  qualities = ItemQuality;
-  bindTypes = ItemBindType;
+  formGroup: FormGroup;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.formGroup = this.formGroup || this.initForm();
+    this.parentForm.addControl('properties', this.initForm());
+    this.formGroup = this.parentForm.get('properties') as FormGroup;
   }
 
   initForm(): FormGroup {
     return this.fb.group({
-      quality: this.fb.control(this.item.quality || ItemQuality.COMMON),
-      price: this.fb.control(this.item.sellPrice || 0),
-      stackSize: this.fb.control(this.item.maxStackSize || 64),
-      blockUsage: this.fb.control(this.item.blockUsage || false),
-      lootable: this.fb.control(this.item.lootable || false),
-      enchantmentEffect: this.fb.control(this.item.enchantmentEffect || false),
-      bindType: this.fb.control(this.item.bindType || ItemBindType.NONE),
-      lore: this.fb.control(this.item.lore || null)
+      sellPrice: this.fb.control(0),
+      maxStackSize: this.fb.control(64),
+      blockUsage: this.fb.control(false),
+      lootable: this.fb.control(false),
+      enchantmentEffect: this.fb.control(false),
+      lore: this.fb.control(null),
+      info: this.fb.control(null)
     })
   }
 

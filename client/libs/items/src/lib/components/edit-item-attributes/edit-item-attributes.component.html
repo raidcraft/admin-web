@@ -2,7 +2,7 @@
   <div formArrayName="attributes">
     <section [formGroupName]="i" *ngFor="let attribute of formArray.controls; let i = index" fxLayout="row" fxLayoutAlign="space-between center">
       <mat-form-field>
-        <mat-select formControlName="type" placeholder="Attribut">
+        <mat-select formControlName="attributeName" placeholder="Attribut">
           <mat-option *ngFor="let attributeType of attributeTypes | keys" [value]="attributeType">
             {{ attributeTypes[attributeType] }}
           </mat-option>

@@ -1,6 +1,6 @@
 import { State, StateContext, Action, Selector, NgxsOnInit } from "@ngxs/store";
 import { RCItem, RCItemCategory, MinecraftItem } from "../models";
-import { RCITEM_MOCK_DATA } from "../models/item.mock-data";
+import { RCITEM_MOCK_DATA } from "../models/items.mock-data";
 import { LoadMinecraftItemsAction, LoadRaidCraftItemsAction, CreateItemActionType, CreateItemAction } from "./items.actions";
 import { MinecraftDataService } from "../services/minecraft-data.service";
 import { normalize, denormalize } from "normalizr";

@@ -1,16 +1,75 @@
-import { Items, ITemsAddModel } from 'models/items.model';
+import { Items, ITemsAddModel, IEquipmentAddModel, Equipment, IItemsModel, IEquipmentModel } from 'models';
+import { Armor, IArmorAddModel } from 'models/armor.model';
+import { Weapon, IWeaponAddModel } from 'models/weapon.model';
+import { Attributes } from 'models/attribute.model';
 
 export class ItemsService {
 
+  private readonly itemInclude = {
+    model: Equipment,
+    as: 'equipment',
+    include: [{
+      model: Armor,
+      as: 'armor'
+    },
+    {
+      model: Weapon,
+      as: 'weapon'
+    },
+    {
+      model: Attributes,
+      as: 'attributes'
+    }]
+  };
+
   public getAll() {
-    return Items.all();
+    return Items.all({
+      include: [this.itemInclude]
+    });
   }
 
   public getItemById(id: number) {
-    return Items.findById(id);
+    return Items.findById(id, {
+      include: [this.itemInclude]
+    });
   }
 
-  public createItem(item: ITemsAddModel) {
-    return Items.create(item);
+  public async createItem(item: ITemsAddModel) {
+    const result = await Items.create(item).then(model => {
+      switch (model.item_type) {
+        case 'EQUIPMENT':
+          return this.createEquipment(item, model).then(() => model);
+        case 'ARMOR':
+          return this.createEquipment(item, model).then(equipment => {
+            return Armor.create({
+              ...item as IArmorAddModel,
+              equipment_id: equipment.id
+            });
+          }).then(() => model);
+        case 'WEAPON':
+          return this.createEquipment(item, model).then(equipment => {
+            return Weapon.create({
+              ...item as IWeaponAddModel,
+              equipment_id: equipment.id
+            });
+          }).then(() => model);
+        default:
+          return Items.create(item);
+      }
+    });
+
+    return await this.getItemById(result.id);
+  }
+
+  private createEquipment(item: ITemsAddModel, dbEntry: IItemsModel) {
+    const model = item as IEquipmentAddModel;
+    return Equipment.create({
+      ...model,
+      item_id: dbEntry.id
+    }).then(equipment => {
+      model.attributes = (model.attributes && model.attributes
+        .map(attribute => ({ ...attribute, equipment_id: equipment.id }))) || [];
+      return Attributes.bulkCreate(model.attributes).then(() => equipment);
+    });
   }
 }

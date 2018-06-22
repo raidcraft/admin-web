@@ -3,11 +3,6 @@ import { sequelize } from '../instances/sequelize';
 
 export interface ITemsAddModel {
   name: string;
-}
-
-export interface IItemsModel extends Sequelize.Model<IItemsModel, ITemsAddModel> {
-  id: number;
-  name: string;
   lore: string;
   minecraft_item: string;
   minecraft_data_value: number;
@@ -21,6 +16,10 @@ export interface IItemsModel extends Sequelize.Model<IItemsModel, ITemsAddModel>
   lootable: boolean;
   enchantment_effect: boolean;
   info: string;
+}
+
+export interface IItemsModel extends ITemsAddModel, Sequelize.Model<IItemsModel, ITemsAddModel> {
+  id: number;
 }
 
 export const Items = sequelize.define<IItemsModel, ITemsAddModel>('rcitems_items', {

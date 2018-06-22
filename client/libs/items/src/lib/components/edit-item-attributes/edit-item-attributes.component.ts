@@ -42,7 +42,7 @@ export class EditItemAttributesComponent implements OnInit {
 
   createAttribute(attribute: RCAttribute): FormGroup {
     return this.fb.group({
-      type: this.fb.control(attribute.attributeType || AttributeType.AGILITY, Validators.required),
+      attributeName: this.fb.control(attribute.attribute || AttributeType.AGILITY, Validators.required),
       value: this.fb.control(attribute.value, Validators.min(1))
     });
   }

@@ -1,5 +1,6 @@
 import { RCItem } from "./item.model";
 
+
 export const RCITEM_MOCK_DATA: RCItem[] = [
   new RCItem({
     id: 1,

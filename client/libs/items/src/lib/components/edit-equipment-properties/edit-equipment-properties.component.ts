@@ -24,7 +24,7 @@ export class EditEquipmentPropertiesComponent implements OnInit {
   initForm(): FormGroup {
     return this.fb.group({
       equipmentSlot: this.fb.control(null, Validators.required),
-      maxDurability: this.fb.control(0, Validators.min(1))
+      durability: this.fb.control(0, Validators.min(1))
     });
   }
 }

@@ -1,4 +1,5 @@
 import * as Sequelize from 'sequelize';
+import { Items, Equipment } from 'models';
 
 const db = 'minecraft';
 const username = 'minecraft';

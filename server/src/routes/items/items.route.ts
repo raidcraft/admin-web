@@ -2,6 +2,7 @@ import { logger } from '@/services';
 import { NextFunction, Request, Response } from 'express';
 import { BaseRoute } from '../route';
 import { ItemsService } from 'services/items.service';
+import * as jwtAuthz from 'express-jwt-authz';
 
 /**
  * @api {get} /ping Ping Request customer object
@@ -39,8 +40,8 @@ export class ItemsRoute extends BaseRoute {
     logger.info('[ItemsRoute] Creating items route.');
 
     // add index page route
-    this.router.get('/', this.get);
-    this.router.post('/', this.post);
+    this.router.get('/', jwtAuthz(['read:items']), this.get);
+    this.router.post('/', jwtAuthz(['write:items']), this.post);
   }
 
   /**

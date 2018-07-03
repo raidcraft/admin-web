@@ -18,6 +18,9 @@
     "paths": {
       "@faldoria/items": [
         "libs/items/src/index.ts"
+      ],
+      "@faldoria/core": [
+        "libs/core/src/index.ts"
       ]
     }
   },

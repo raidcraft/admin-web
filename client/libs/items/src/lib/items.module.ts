@@ -5,7 +5,6 @@ import { ItemsTableComponent, CreateItemDialogComponent, EditItemPropertiesCompo
 import { ItemsComponent } from './pages';
 import { MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule, MatCheckboxModule, MatIconModule, MatButtonModule, MatDialogModule, MatTabsModule, MatSelectModule, MatTooltipModule, MatDividerModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
-import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
 import { ItemsState } from './store/items.state';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -34,7 +33,6 @@ export const MATERIAL_IMPORTS = [
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     FormsModule,

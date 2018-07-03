@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ItemsService } from '../../services/items.service';
 import { MatDialog } from '@angular/material';
 import { CreateItemDialogComponent } from '../../components';
+import { AuthService } from '@faldoria/core';
 
 @Component({
   selector: 'rci-items',
@@ -10,7 +11,7 @@ import { CreateItemDialogComponent } from '../../components';
 })
 export class ItemsComponent implements OnInit {
 
-  constructor(public items: ItemsService, private dialog: MatDialog) { }
+  constructor(public items: ItemsService, private dialog: MatDialog, public auth: AuthService) { }
 
   ngOnInit() {
   }

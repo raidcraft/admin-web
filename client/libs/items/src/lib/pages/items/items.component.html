@@ -1,6 +1,6 @@
 <rci-items-table [items]="items.items$"></rci-items-table>
 
-<div class="fab-container">
+<div *ngIf="auth.userHasScopes('write:items')" class="fab-container">
   <button mat-fab color="accent" (click)="openCreateItemDialog()">
     <mat-icon>add</mat-icon>
   </button>

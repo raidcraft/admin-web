@@ -8,6 +8,8 @@ import * as helmet from 'helmet';
 import * as methodOverride from 'method-override';
 import * as morgan from 'morgan';
 import * as path from 'path';
+import * as jwt from 'express-jwt';
+import * as jwks from 'jwks-rsa';
 
 import { ApiRoutes } from './routes';
 import { logger } from './services';
@@ -25,7 +27,7 @@ export class Server {
    * @method bootstrap
    * @static
    */
-  public static bootstrap (): Server {
+  public static bootstrap(): Server {
     return new Server();
   }
 
@@ -37,7 +39,7 @@ export class Server {
    * @class Server
    * @constructor
    */
-  constructor () {
+  constructor() {
     // create expressjs application
     this.app = express();
 
@@ -54,7 +56,7 @@ export class Server {
    * @class Server
    * @method config
    */
-  public config () {
+  public config() {
     // add static paths
     this.app.use(express.static(path.join(__dirname, 'public')));
 
@@ -80,11 +82,25 @@ export class Server {
     this.app.use(methodOverride());
     this.app.use(expressStatusMonitor());
 
-    // catch 404 and forward to error handler
-    this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-      err.status = 404;
-      next(err);
+    var jwtCheck = jwt({
+      secret: jwks.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: "https://faldoria.eu.auth0.com/.well-known/jwks.json"
+      }),
+      audience: 'https://api.faldoria.de',
+      issuer: "https://faldoria.eu.auth0.com/",
+      algorithms: ['RS256']
     });
+
+    this.app.use(jwtCheck);
+
+    // catch 404 and forward to error handler
+    // this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    //   err.status = 404;
+    //   next(err);
+    // });
 
     // error handling
     this.app.use(errorHandler());
@@ -97,7 +113,7 @@ export class Server {
    * @method routes
    * @return void
    */
-  private routes () {
+  private routes() {
     // use router middleware
     this.app.use(ApiRoutes.path, ApiRoutes.router);
   }

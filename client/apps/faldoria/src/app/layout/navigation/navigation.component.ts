@@ -6,6 +6,7 @@ import {
 } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthService } from '@faldoria/core';
 
 @Component({
   selector: 'app-navigation',
@@ -17,5 +18,5 @@ export class NavigationComponent {
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, public auth: AuthService) { }
 }

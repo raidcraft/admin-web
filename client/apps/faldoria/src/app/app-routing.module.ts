@@ -1,8 +1,19 @@
 import { RouterModule, Route } from "@angular/router";
 import { NgModule } from "@angular/core";
+import { HomeComponent } from "./components";
+import { AuthGuard, ScopeGuard } from "@faldoria/core";
 
 export const routes: Route[] = [
-  { path: 'items', loadChildren: '../../../../libs/items/src/lib/items.module#ItemsModule' }
+  { path: 'home', component: HomeComponent },
+  {
+    path: 'items',
+    loadChildren: '../../../../libs/items/src/lib/items.module#ItemsModule',
+    canActivate: [ScopeGuard],
+    data: {
+      scopes: ['read:items']
+    }
+  },
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({

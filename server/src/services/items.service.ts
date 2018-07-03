@@ -35,26 +35,26 @@ export class ItemsService {
   }
 
   public async createItem(item: ITemsAddModel) {
-    const result = await Items.create(item).then(model => {
+    const result = await Items.create(item).then(async model => {
       switch (model.item_type) {
         case 'EQUIPMENT':
-          return this.createEquipment(item, model).then(() => model);
+          return await this.createEquipment(item, model).then(() => model);
         case 'ARMOR':
-          return this.createEquipment(item, model).then(equipment => {
-            return Armor.create({
+          return await this.createEquipment(item, model).then(async equipment => {
+            return await Armor.create({
               ...item as IArmorAddModel,
               equipment_id: equipment.id
             });
           }).then(() => model);
         case 'WEAPON':
-          return this.createEquipment(item, model).then(equipment => {
-            return Weapon.create({
+          return await this.createEquipment(item, model).then(async equipment => {
+            return await Weapon.create({
               ...item as IWeaponAddModel,
               equipment_id: equipment.id
             });
           }).then(() => model);
         default:
-          return Items.create(item);
+          return model;
       }
     });
 

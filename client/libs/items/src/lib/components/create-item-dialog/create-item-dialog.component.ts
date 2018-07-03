@@ -37,7 +37,7 @@ export class CreateItemDialogComponent implements OnInit {
 
   saveItem() {
     this.items.createItem(this.buildModel());
-    // this.dialogRef.close();
+    this.dialogRef.close();
   }
 
   buildModel(): RCItem {

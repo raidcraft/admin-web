@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ItemsTableDataSource } from './items-table-datasource';
-import { RCItem } from '../../models';
+import { RCItem, ItemQuality, ItemType, ItemBindType } from '../../models';
 import { ItemsService } from '../../services';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,19 +13,41 @@ import { map } from 'rxjs/operators';
 })
 export class ItemsTableComponent implements OnInit {
 
-  @Input() items: Observable<RCItem[]>;
+  @Input() get items(): RCItem[] {
+    return this._items;
+  }
+  set items(value: RCItem[]) {
+    this._items = value;
+    this.dataSource.data = value;
+  }
+  private _items: RCItem[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: ItemsTableDataSource;
+
+  dataSource: MatTableDataSource<RCItem>;
+
+  qualities = ItemQuality;
+  itemTypes = ItemType;
+  bindTypes = ItemBindType;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['id', 'name', 'minecraft_item', 'type', 'quality', 'bind_type', 'action'];
 
-  length$: Observable<number>;
+  constructor() {
+    this.dataSource = new MatTableDataSource(this.items);
+  }
 
   ngOnInit() {
-    this.dataSource = new ItemsTableDataSource(this.items, this.paginator, this.sort);
-    this.length$ = this.items.pipe(map(items => items.length));
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

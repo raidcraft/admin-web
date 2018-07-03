@@ -39,7 +39,6 @@ export class ItemsRoute extends BaseRoute {
     // log
     logger.info('[ItemsRoute] Creating items route.');
 
-    // add index page route
     this.router.get('/', jwtAuthz(['read:items']), this.get);
     this.router.post('/', jwtAuthz(['write:items']), this.post);
   }

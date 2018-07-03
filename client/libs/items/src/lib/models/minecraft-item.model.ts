@@ -10,7 +10,7 @@ export class MinecraftItem {
       this.type = data.text_type || data.minecraft_item || data.type;
       this.name = data.name;
       this.meta = data.meta || data.minecraft_data_dalue || 0;
-      this.id = data.id || this.type + this.meta;
+      this.id = this.type + ':' + this.meta;
     }
   }
 }

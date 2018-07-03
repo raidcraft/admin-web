@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Host } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, ControlContainer, FormGroupDirective } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, ControlContainer, FormGroupDirective, AbstractControl } from '@angular/forms';
 import { RCItem, ItemType, ItemQuality, ItemBindType, keyFromValue } from '../../models';
 import { ItemsService } from '../../services';
 import { MatSelectChange } from '@angular/material';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'rci-edit-item-general',
@@ -29,11 +30,17 @@ export class EditItemGeneralComponent implements OnInit {
 
   initForm(): FormGroup {
     return this.fb.group({
-      name: this.fb.control('', Validators.required),
+      name: this.fb.control('', Validators.required, this.validateNameNotTaken.bind(this)),
       minecraftItem: this.fb.control(null, Validators.required),
       quality: this.fb.control("COMMON", Validators.required),
       bindType: this.fb.control("NONE", Validators.required),
       itemType: this.fb.control(null, Validators.required)
     });
+  }
+
+  validateNameNotTaken(control: AbstractControl) {
+    return this.items.isExistingItem(control.value).pipe(
+      map(res => res ? { nameTaken: true } : null)
+    );
   }
 }

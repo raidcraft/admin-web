@@ -1,5 +1,5 @@
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const NodemonPlugin = require( 'nodemon-webpack-plugin' );
+const NodemonPlugin = require('nodemon-webpack-plugin');
 const merge = require('webpack-merge');
 const path = require('path');
 const env = process.env.NODE_ENV || 'development';
@@ -44,7 +44,9 @@ const baseConfig = {
 const developmentConfig = {
   devtool: 'cheap-eval-source-map',
   plugins: [
-    new NodemonPlugin(),
+    new NodemonPlugin({
+      nodeArgs: ['--inspect']
+    })
   ],
 };
 

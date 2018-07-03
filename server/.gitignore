@@ -24,4 +24,3 @@ checkstyle-result.xml
 .idea
 .vs
 .vscode
-package-lock.json

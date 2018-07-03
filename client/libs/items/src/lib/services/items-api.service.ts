@@ -11,7 +11,6 @@ import { map } from 'rxjs/operators';
 export class ItemsApiService {
 
   private readonly BASE_URL = '/api/items';
-  private idCount = RCITEM_MOCK_DATA.length;
 
   constructor(private http: HttpClient) { }
 

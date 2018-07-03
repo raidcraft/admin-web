@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - faldoria-web
+      - faldoria-api
+
+  faldoria-web:
+    build: ./client
+    environment:
+      - NODE_ENV=production
+    expose:
+      - "80"
+    depends_on:
+      - faldoria-api
+
+  faldoria-api:
+    build: ./server
+    hostname: faldoria-api
+    environment:
+      - NODE_ENV=production
+    expose:
+      - "3000"

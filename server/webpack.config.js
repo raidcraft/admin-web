@@ -42,7 +42,7 @@ const baseConfig = {
 };
 
 const developmentConfig = {
-  devtool: 'cheap-eval-source-map',
+  devtool: 'source-map',
   plugins: [
     new NodemonPlugin({
       nodeArgs: ['--inspect']

@@ -16,6 +16,9 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@faldoria/env": [
+        "apps/faldoria/src/environments/environment.ts"
+      ],
       "@faldoria/items": [
         "libs/items/src/index.ts"
       ],

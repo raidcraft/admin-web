@@ -4,6 +4,7 @@
     "password": "password",
     "requestTimeout": 60000,
     "server": "host.docker.internal",
-    "user": "minecraft"
+    "user": "minecraft",
+    "port": 3306
   }
 }

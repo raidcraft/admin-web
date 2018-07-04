@@ -16,7 +16,7 @@ services:
     environment:
       - NODE_ENV=production
     expose:
-      - "80"
+      - "4200"
     depends_on:
       - faldoria-api
 

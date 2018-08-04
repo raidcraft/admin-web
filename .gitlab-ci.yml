@@ -11,15 +11,32 @@ before_script:
 build-client-master:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" ./client
-    - docker push "$CI_REGISTRY_IMAGE"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/client" ./client
+    - docker push "$CI_REGISTRY_IMAGE/client"
   only:
     - master
 
 build-client:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" ./client
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/client:$CI_COMMIT_REF_SLUG" ./client
+    - docker push "$CI_REGISTRY_IMAGE/client:$CI_COMMIT_REF_SLUG"
+  except:
+    - master
+
+
+build-server-master:
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/server" ./server
+    - docker push "$CI_REGISTRY_IMAGE"
+  only:
+    - master
+
+build-server:
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/server:$CI_COMMIT_REF_SLUG" ./server
+    - docker push "$CI_REGISTRY_IMAGE/server:$CI_COMMIT_REF_SLUG"
   except:
     - master

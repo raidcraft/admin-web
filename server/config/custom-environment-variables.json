@@ -5,6 +5,6 @@
     "requestTimeout": 60000,
     "server": "API_DB_SERVER",
     "user": "API_DB_USER",
-    "port": "API_DB_PORT"
+    "port": 3306
   }
 }

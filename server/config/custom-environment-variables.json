@@ -2,9 +2,8 @@
   "db": {
     "password": "API_DB_PASSWORD",
     "database": "API_DB_DATABASE",
-    "requestTimeout": 60000,
     "server": "API_DB_SERVER",
     "user": "API_DB_USER",
-    "port": 3306
+    "port": "API_DB_PORT"
   }
 }

@@ -6,6 +6,7 @@ export interface DbConfig {
   password: string;
   server: string;
   user: string;
+  port: number;
 }
 
 const dbConfig = config.get<DbConfig>('db');
@@ -13,7 +14,7 @@ const dbConfig = config.get<DbConfig>('db');
 export const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
   dialect: 'mysql',
   host: dbConfig.server,
-  port: 3306,
+  port: dbConfig.port,
   define: {
     timestamps: false,
     freezeTableName: true

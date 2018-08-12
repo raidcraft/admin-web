@@ -1,10 +1,7 @@
 {
-  "name": "api",
-  "port": 3000,
   "db": {
     "database": "minecraft",
     "password": "password",
-    "requestTimeout": 60000,
     "server": "localhost",
     "user": "minecraft",
     "port": 3306

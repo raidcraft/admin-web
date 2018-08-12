@@ -1,4 +1,6 @@
 {
+  "name": "api",
+  "port": 3000,
   "db": {
     "database": "minecraft",
     "password": "password",

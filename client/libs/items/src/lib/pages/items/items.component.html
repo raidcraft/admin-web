@@ -1,4 +1,4 @@
-<rci-items-table [items]="items.items$ | async"></rci-items-table>
+<rci-items-table (delete)="onDeleteItem($event)" [items]="items.items$ | async"></rci-items-table>
 
 <div *ngIf="auth.userHasScopes('write:items')" class="fab-container">
   <button mat-fab color="accent" (click)="openCreateItemDialog()">

@@ -5,3 +5,5 @@ export const LoadMinecraftItemsAction = action('[Items] Load Minecraft Items');
 export const LoadRaidCraftItemsAction = action('[Items] Load RaidCraft Items');
 export const CreateItemAction = action('[Items] Create', payload<RCItem>());
 export const CreateItemActionType = union({ CreateItemAction });
+export const DeleteItemAction = action('[Items] Delete', payload<number>());
+export const DeleteItemActionType = union({ DeleteItemAction });

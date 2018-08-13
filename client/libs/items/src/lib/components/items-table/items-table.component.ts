@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ItemsTableDataSource } from './items-table-datasource';
 import { RCItem, ItemQuality, ItemType, ItemBindType } from '../../models';
@@ -21,6 +21,8 @@ export class ItemsTableComponent implements OnInit {
     this.dataSource.data = value;
   }
   private _items: RCItem[] = [];
+
+  @Output() delete = new EventEmitter<number>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -49,5 +51,9 @@ export class ItemsTableComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  deleteItem(id: number) {
+    this.delete.emit(id);
   }
 }

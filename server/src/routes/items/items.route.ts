@@ -41,6 +41,8 @@ export class ItemsRoute extends BaseRoute {
 
     this.router.get('/', jwtAuthz(['read:items']), this.get);
     this.router.post('/', jwtAuthz(['write:items']), this.post);
+    this.router.post('/:id', jwtAuthz(['write:items']), this.update);
+    this.router.delete('/:id', jwtAuthz(['write:items']), this.delete);
   }
 
   /**
@@ -57,6 +59,18 @@ export class ItemsRoute extends BaseRoute {
 
   private async post(req: Request, res: Response, next: NextFunction) {
     res.json(await this.itemsService.createItem(req.body));
+    next();
+  }
+
+  private async update(req: Request, res: Response, next: NextFunction) {
+    const id = +req.params.id;
+    res.json(await this.itemsService.updateItem(id, req.body));
+    next();
+  }
+
+  private async delete(req: Request, res: Response, next: NextFunction) {
+    const id = +req.params.id;
+    res.json(await this.itemsService.deleteItem(id));
     next();
   }
 }

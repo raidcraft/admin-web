@@ -72,4 +72,15 @@ export class ItemsService {
       return Attributes.bulkCreate(model.attributes).then(() => equipment);
     });
   }
+
+  public async updateItem(id: number, item: ITemsAddModel) {
+    const model = await this.getItemById(id);
+    model.update(item);
+    return await this.getItemById(id);
+  }
+
+  public async deleteItem(id: number) {
+    const model = await this.getItemById(id);
+    return await model.destroy({cascade: true});
+  }
 }

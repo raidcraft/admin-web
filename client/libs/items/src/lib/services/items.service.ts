@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { ItemsState, ItemsStateModel } from '../store/items.state';
 import { ItemsApiService } from './items-api.service';
 import { map, filter } from 'rxjs/operators';
-import { CreateItemAction } from '../store/items.actions';
+import { CreateItemAction, DeleteItemAction } from '../store/items.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,9 @@ export class ItemsService {
       filter<RCItem[]>(items => items.find(item => item.name === name) != null),
       map(result => result.length > 0)
     );
+  }
+
+  public deleteItem(id: number) {
+    this.store.dispatch(new DeleteItemAction(id));
   }
 }

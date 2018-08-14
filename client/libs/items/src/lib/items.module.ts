@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ItemsRoutingModule } from './items-routing.module';
 import { ItemsTableComponent, CreateItemDialogComponent, EditItemPropertiesComponent, EditItemGeneralComponent, EditItemAttributesComponent } from './components';
 import { ItemsComponent } from './pages';
-import { MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule, MatCheckboxModule, MatIconModule, MatButtonModule, MatDialogModule, MatTabsModule, MatSelectModule, MatTooltipModule, MatDividerModule } from '@angular/material';
+import { MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule, MatCheckboxModule, MatIconModule, MatButtonModule, MatDialogModule, MatTabsModule, MatSelectModule, MatTooltipModule, MatDividerModule, MatMenuModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 import { NgxsModule } from '@ngxs/store';
 import { ItemsState } from './store/items.state';
@@ -27,7 +27,8 @@ export const MATERIAL_IMPORTS = [
   MatSelectModule,
   CdkTableModule,
   MatTooltipModule,
-  MatDividerModule
+  MatDividerModule,
+  MatMenuModule
 ];
 
 @NgModule({

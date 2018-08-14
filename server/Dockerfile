@@ -21,5 +21,10 @@ ARG configuration=production
 
 ENV NODE_ENV=${configuration}
 
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]
+
 EXPOSE 3000
 CMD [ "node", "index.js" ]

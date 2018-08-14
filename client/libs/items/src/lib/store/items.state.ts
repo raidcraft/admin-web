@@ -1,7 +1,7 @@
 import { State, StateContext, Action, Selector, NgxsOnInit } from "@ngxs/store";
 import { RCItem, RCItemCategory, MinecraftItem } from "../models";
 import { RCITEM_MOCK_DATA } from "../models/items.mock-data";
-import { LoadMinecraftItemsAction, LoadRaidCraftItemsAction, CreateItemActionType, CreateItemAction } from "./items.actions";
+import { LoadMinecraftItemsAction, LoadRaidCraftItemsAction, CreateItemActionType, CreateItemAction, DeleteItemActionType } from "./items.actions";
 import { MinecraftDataService } from "../services/minecraft-data.service";
 import { normalize, denormalize } from "normalizr";
 import { raidcraftItemsListSchema, minecraftItemsListSchema, raidCraftItemSchema } from "./items.normalizr";
@@ -72,6 +72,16 @@ export class ItemsState implements NgxsOnInit {
     return this.itemsApi.createItem(payload).pipe(
       map(item => normalize(item, raidCraftItemSchema)),
       tap(result => this.updateEntitiesState(ctx, result.entities, 'minecraft_items'))
+    );
+  }
+
+  deleteItem(ctx: StateContext<ItemsStateModel>, { payload }: typeof DeleteItemActionType) {
+    return this.itemsApi.deleteItem(payload).pipe(
+      tap(result => {
+        const state = ctx.getState();
+        delete state.entities.items[payload];
+        ctx.setState(state);
+      })
     );
   }
 

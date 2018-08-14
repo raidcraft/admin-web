@@ -26,6 +26,10 @@ export class ItemsApiService {
     );
   }
 
+  deleteItem(id: number): Observable<any> {
+    return this.http.delete(`${this.BASE_URL}/${id}`);
+  }
+
   private mapToItem(data: any): RCItem {
 
     switch (data.item_type) {

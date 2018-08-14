@@ -19,4 +19,10 @@ export class ItemsComponent implements OnInit {
   openCreateItemDialog() {
     this.dialog.open(CreateItemDialogComponent);
   }
+
+  onDeleteItem(id: number) {
+    if (confirm('Bist Du dir sicher, dass Du das Item mit der ID ' + id + ' löschen möchtest?')) {
+      this.items.deleteItem(id);
+    }
+  }
 }

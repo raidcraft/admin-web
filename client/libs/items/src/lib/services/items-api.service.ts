@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class ItemsApiService {
 
-    private readonly BASE_URL = 'http://faldoria-api/api/items';
+    private readonly BASE_URL = '/api/items';
 
     constructor(private http: HttpClient) { }
 

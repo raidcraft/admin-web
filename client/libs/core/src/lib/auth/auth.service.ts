@@ -14,7 +14,7 @@ export class AuthService {
     domain: 'faldoria.eu.auth0.com',
     responseType: 'token id_token',
     audience: 'https://api.faldoria.de',
-    redirectUri: location.host,
+    redirectUri: `https://${location.host}/`,
     scope: 'openid profile read:items write:items'
   });
 

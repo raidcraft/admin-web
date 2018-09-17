@@ -17,6 +17,8 @@ services:
       - NODE_ENV=production
     expose:
       - "4200"
+    ports:
+      - "4200:4200"
     depends_on:
       - faldoria-api
 

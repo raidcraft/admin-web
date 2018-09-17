@@ -12,6 +12,6 @@ function fix_linux_internal_host() {
   fi
 }
 
-fix_linux_internal_host
+fix_linux_internal_host || echo "Running on Windows or MAC. Not updating /etc/hosts..."
 
 exec "$@"

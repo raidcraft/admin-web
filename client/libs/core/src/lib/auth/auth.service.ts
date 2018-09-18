@@ -13,7 +13,7 @@ export class AuthService {
     clientID: 'WZDNs2gM86FKivtIVgbrvdVqDW3j19Y0',
     domain: 'faldoria.eu.auth0.com',
     responseType: 'token id_token',
-    audience: 'https://api.faldoria.de',
+    audience: 'https://app.faldoria.de',
     redirectUri: `https://${location.host}/`,
     scope: 'openid profile read:items write:items'
   });

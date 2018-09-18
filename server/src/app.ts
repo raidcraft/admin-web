@@ -89,7 +89,7 @@ export class Server {
         jwksRequestsPerMinute: 5,
         jwksUri: "https://faldoria.eu.auth0.com/.well-known/jwks.json"
       }),
-      audience: 'https://api.faldoria.de',
+      audience: 'https://app.faldoria.de',
       issuer: "https://faldoria.eu.auth0.com/",
       algorithms: ['RS256']
     });

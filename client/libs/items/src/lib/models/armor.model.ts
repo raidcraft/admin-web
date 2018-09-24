@@ -20,4 +20,14 @@ export class RCArmor extends RCEquipment {
       armor_type: this.armorType
     }
   }
+
+  toFormFormat(): any {
+    return {
+      ...super.toFormFormat(),
+      armor: {
+        armorValue: this.armorValue,
+        armorType: this.armorType
+      }
+    };
+  }
 }

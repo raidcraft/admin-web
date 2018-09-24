@@ -1,0 +1,4 @@
+<h2 mat-dialog-title>{{(items.editingItem$ | async)?.name}} (#{{(items.editingItem$ | async)?.id}})</h2>
+<mat-dialog-content>
+  <rci-item-form [item]="items.editingItem$ | async" (save)="onSave($event)"></rci-item-form>
+</mat-dialog-content>

@@ -1,19 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ItemsRoutingModule } from './items-routing.module';
-import { ItemsTableComponent, CreateItemDialogComponent, EditItemPropertiesComponent, EditItemGeneralComponent, EditItemAttributesComponent } from './components';
-import { ItemsComponent } from './pages';
-import { MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule, MatCheckboxModule, MatIconModule, MatButtonModule, MatDialogModule, MatTabsModule, MatSelectModule, MatTooltipModule, MatDividerModule, MatMenuModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
-import { NgxsModule } from '@ngxs/store';
-import { ItemsState } from './store/items.state';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatIconModule, MatInputModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatSortModule, MatTableModule, MatTabsModule, MatTooltipModule } from '@angular/material';
+import { NgxsModule } from '@ngxs/store';
+import { CreateItemDialogComponent, EditArmorPropertiesComponent, EditEquipmentPropertiesComponent, EditItemAttributesComponent, EditItemGeneralComponent, EditItemPropertiesComponent, EditWeaponPropertiesComponent, ItemFormComponent, ItemsTableComponent, EditItemDialogComponent } from './components';
+import { ItemsRoutingModule } from './items-routing.module';
+import { ItemsComponent } from './pages';
 import { KeysPipe } from './pipes/keys.pipe';
-import { EditWeaponPropertiesComponent } from './components/edit-weapon-properties/edit-weapon-properties.component';
-import { EditArmorPropertiesComponent } from './components/edit-armor-properties/edit-armor-properties.component';
-import { EditEquipmentPropertiesComponent } from './components/edit-equipment-properties/edit-equipment-properties.component';
-import { ItemFormComponent } from './components/item-form/item-form.component';
+import { ItemsState } from './store/items.state';
 
 export const MATERIAL_IMPORTS = [
   MatTableModule,
@@ -53,10 +49,12 @@ export const MATERIAL_IMPORTS = [
     EditWeaponPropertiesComponent,
     EditArmorPropertiesComponent,
     EditEquipmentPropertiesComponent,
-    ItemFormComponent
+    ItemFormComponent,
+    EditItemDialogComponent
   ],
   entryComponents: [
-    CreateItemDialogComponent
+    CreateItemDialogComponent,
+    EditItemDialogComponent
   ]
 })
 export class ItemsModule { }

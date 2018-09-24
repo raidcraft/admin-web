@@ -1,19 +1,22 @@
 import { State, StateContext, Action, Selector, NgxsOnInit } from "@ngxs/store";
 import { RCItem, RCItemCategory, MinecraftItem } from "../models";
 import { RCITEM_MOCK_DATA } from "../models/items.mock-data";
-import { LoadMinecraftItemsAction, LoadRaidCraftItemsAction, CreateItemActionType, CreateItemAction, DeleteItemActionType } from "./items.actions";
+import { LoadMinecraftItemsAction, LoadRaidCraftItemsAction, CreateItemActionType, CreateItemAction, DeleteItemActionType, UpdateItemAction, UpdateItemActionType, DeleteItemAction, SetEditingItemAction, SetEditingItemActionType } from "./items.actions";
 import { MinecraftDataService } from "../services/minecraft-data.service";
 import { normalize, denormalize } from "normalizr";
 import { raidcraftItemsListSchema, minecraftItemsListSchema, raidCraftItemSchema } from "./items.normalizr";
 import { map, tap } from "rxjs/operators";
 import { ItemsApiService } from "../services/items-api.service";
+import { isNullOrUndefined } from "util";
+import { ItemsService } from "../services";
 
 export interface ItemsStateModel {
   entities: {
     items: { [id: number]: RCItem };
     categories: { [id: number]: RCItemCategory };
     minecraft_items: MinecraftItem[]
-  }
+  },
+  editedItemId: number | null;
 }
 
 export const DEFAULT_ITEM_STORE: ItemsStateModel = {
@@ -21,7 +24,8 @@ export const DEFAULT_ITEM_STORE: ItemsStateModel = {
     items: {},
     categories: {},
     minecraft_items: []
-  }
+  },
+  editedItemId: null
 }
 
 @State({
@@ -39,6 +43,14 @@ export class ItemsState implements NgxsOnInit {
   @Selector()
   static raidcraftItems(state: ItemsStateModel) {
     return denormalize(Object.keys(state.entities.items), raidcraftItemsListSchema, state.entities);
+  }
+
+  @Selector()
+  static editingItem(state: ItemsStateModel) {
+    if (isNullOrUndefined(state.editedItemId)) {
+      return null;
+    }
+    return ItemsService.createItem(denormalize(state.editedItemId, raidCraftItemSchema, state.entities));
   }
 
   constructor(private minecraftData: MinecraftDataService, private itemsApi: ItemsApiService) { }
@@ -75,6 +87,15 @@ export class ItemsState implements NgxsOnInit {
     );
   }
 
+  @Action(UpdateItemAction)
+  updateItem(ctx: StateContext<ItemsStateModel>, { payload }: typeof UpdateItemActionType) {
+    return this.itemsApi.updateItem(payload).pipe(
+      map(item => normalize(item, raidCraftItemSchema)),
+      tap(result => this.updateEntitiesState(ctx, result.entities, 'minecraft_items'))
+    );
+  }
+
+  @Action(DeleteItemAction)
   deleteItem(ctx: StateContext<ItemsStateModel>, { payload }: typeof DeleteItemActionType) {
     return this.itemsApi.deleteItem(payload).pipe(
       tap(result => {
@@ -83,6 +104,11 @@ export class ItemsState implements NgxsOnInit {
         ctx.setState(state);
       })
     );
+  }
+
+  @Action(SetEditingItemAction)
+  setEditingItem(ctx: StateContext<ItemsStateModel>, { payload }: typeof SetEditingItemActionType) {
+    return ctx.patchState({ editedItemId: payload });
   }
 
   updateEntitiesState(ctx: StateContext<ItemsStateModel>, entities: any, ...excludedKeys: string[]) {

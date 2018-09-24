@@ -26,4 +26,16 @@ export class RCWeapon extends RCEquipment {
       weapon_type: this.weaponType
     }
   }
+
+  toFormFormat(): any {
+    return {
+      ...super.toFormFormat(),
+      weapon: {
+        swingTime: this.swingTime,
+        minDamage: this.minDamage,
+        maxDamage: this.maxDamage,
+        weaponType: this.weaponType
+      }
+    }
+  }
 }

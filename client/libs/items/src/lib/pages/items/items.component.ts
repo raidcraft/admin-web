@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemsService } from '../../services/items.service';
 import { MatDialog } from '@angular/material';
-import { CreateItemDialogComponent } from '../../components';
+import { CreateItemDialogComponent, EditItemDialogComponent } from '../../components';
 import { AuthService } from '@faldoria/core';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'rci-items',
@@ -18,6 +19,10 @@ export class ItemsComponent implements OnInit {
 
   openCreateItemDialog() {
     this.dialog.open(CreateItemDialogComponent);
+  }
+
+  openEditItemDialog(id: number) {
+    this.items.editItem(id).pipe(take(1)).subscribe(() => this.dialog.open(EditItemDialogComponent));
   }
 
   onDeleteItem(id: number) {

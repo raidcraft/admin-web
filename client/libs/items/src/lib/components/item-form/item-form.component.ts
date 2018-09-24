@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ItemType, RCArmor, RCEquipment, RCItem, RCWeapon } from '../../models';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'rci-item-form',
@@ -9,6 +10,7 @@ import { ItemType, RCArmor, RCEquipment, RCItem, RCWeapon } from '../../models';
 })
 export class ItemFormComponent {
 
+  @Input() item: RCItem = null;
   @Output() save = new EventEmitter<RCItem>();
 
   formGroup = new FormGroup({});
@@ -35,7 +37,7 @@ export class ItemFormComponent {
 
   buildModel(): RCItem {
     const form = this.formGroup.value;
-    const data = { ...form.general, ...form.properties };
+    const data = { id: this.item.id, ...form.general, ...form.properties };
 
     let item: RCItem;
 

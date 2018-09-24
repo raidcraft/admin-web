@@ -3,6 +3,7 @@ import { MinecraftItem } from "./minecraft-item.model";
 import { ItemType, ItemQuality, ItemBindType } from "./items.model";
 
 export class RCItem {
+
   id: number;
   name: string;
   categories: RCItemCategory[] = [];
@@ -58,6 +59,27 @@ export class RCItem {
       max_stack_size: this.maxStackSize,
       sell_price: this.sellPrice,
       info: this.info
+    };
+  }
+
+  toFormFormat(): any {
+    return {
+      general: {
+        name: this.name,
+        minecraftItem: this.minecraftItem.id,
+        quality: this.quality,
+        bindType: this.bindType,
+        itemType: this.itemType
+      },
+      properties: {
+        sellPrice: this.sellPrice,
+        maxStackSize: this.maxStackSize,
+        blockUsage: this.blockUsage,
+        lootable: this.lootable,
+        enchantmentEffect: this.enchantmentEffect,
+        lore: this.lore,
+        info: this.info
+      }
     };
   }
 }

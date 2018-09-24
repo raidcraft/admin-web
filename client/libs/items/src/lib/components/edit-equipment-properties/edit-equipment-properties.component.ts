@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { EquipmentSlot } from '../../models';
+import { EquipmentSlot, RCEquipment } from '../../models';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'rci-edit-equipment-properties',
@@ -9,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class EditEquipmentPropertiesComponent implements OnInit {
 
+  @Input() item: RCEquipment = null;
   @Input() parentForm: FormGroup;
 
   equipmentSlots = EquipmentSlot;
@@ -19,6 +21,12 @@ export class EditEquipmentPropertiesComponent implements OnInit {
   ngOnInit() {
     this.parentForm.addControl('equipment', this.initForm());
     this.formGroup = this.parentForm.get('equipment') as FormGroup;
+    if (!isNullOrUndefined(this.item)) {
+      this.formGroup.patchValue({
+        equipmentSlot: this.item.equipmentSlot,
+        durability: this.item.durability
+      })
+    }
   }
 
   initForm(): FormGroup {

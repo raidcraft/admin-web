@@ -1,7 +1,8 @@
 import { RouterModule, Route } from "@angular/router";
 import { NgModule } from "@angular/core";
-import { HomeComponent } from "./components";
 import { AuthGuard, ScopeGuard } from "@faldoria/core";
+import { AppComponent } from "./app.component";
+import { HomeComponent } from "./layout/home/home.component";
 
 export const routes: Route[] = [
   { path: 'home', component: HomeComponent },

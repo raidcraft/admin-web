@@ -19,8 +19,8 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoreModule, AuthService } from '@faldoria/core';
-import { HomeComponent } from './components/home/home.component';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { HomeComponent } from './layout/home/home.component';
 
 export function jwtOptionsFactory(auth: AuthService) {
   return {

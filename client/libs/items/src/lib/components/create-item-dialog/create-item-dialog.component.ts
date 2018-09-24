@@ -12,55 +12,12 @@ import { EditItemAttributesComponent } from '../edit-item-attributes';
   templateUrl: './create-item-dialog.component.html',
   styleUrls: ['./create-item-dialog.component.scss']
 })
-export class CreateItemDialogComponent implements OnInit {
-
-  formGroup = new FormGroup({});
-
-  itemTypes = ItemType;
-
-  get itemType() {
-    const general = this.formGroup.get('general');
-    const itemType = general && general.get('itemType');
-    return itemType && ItemType[itemType.value];
-  }
-
-  get isEquipment() {
-    return this.itemType === ItemType.ARMOR
-      || this.itemType === ItemType.EQUIPMENT
-      || this.itemType === ItemType.WEAPON;
-  }
+export class CreateItemDialogComponent {
 
   constructor(private dialogRef: MatDialogRef<CreateItemDialogComponent>, private items: ItemsService) { }
 
-  ngOnInit() {
-  }
-
-  saveItem() {
-    this.items.createItem(this.buildModel());
+  onSave(item: RCItem) {
+    this.items.createItem(item);
     this.dialogRef.close();
-  }
-
-  buildModel(): RCItem {
-    const form = this.formGroup.value;
-    const data = { ...form.general, ...form.properties };
-
-    let item: RCItem;
-
-    switch (this.itemType) {
-      case ItemType.WEAPON:
-        item = new RCWeapon({ ...data, ...form.weapon, ...form.attributes, ...form.equipment });
-        break;
-      case ItemType.ARMOR:
-        item = new RCArmor({ ...data, ...form.armor, ...form.attributes, ...form.equipment });
-        break;
-      case ItemType.EQUIPMENT:
-        item = new RCEquipment({ ...data, ...form.attributes, ...form.equipment });
-        break;
-      default:
-        item = new RCItem(data);
-        break;
-    }
-
-    return item;
   }
 }

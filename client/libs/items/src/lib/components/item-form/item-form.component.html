@@ -1,0 +1,22 @@
+<form [formGroup]="formGroup">
+  <mat-tab-group>
+    <mat-tab label="Allgemein">
+      <rci-edit-item-general [parentForm]="formGroup"></rci-edit-item-general>
+      <rci-edit-equipment-properties *ngIf="isEquipment" [parentForm]="formGroup"></rci-edit-equipment-properties>
+      <ng-container [ngSwitch]="itemType">
+        <rci-edit-armor-properties *ngSwitchCase="itemTypes.ARMOR" [parentForm]="formGroup"></rci-edit-armor-properties>
+        <rci-edit-weapon-properties *ngSwitchCase="itemTypes.WEAPON" [parentForm]="formGroup"></rci-edit-weapon-properties>
+      </ng-container>
+    </mat-tab>
+    <mat-tab label="Eigenschaften">
+      <rci-edit-item-properties [parentForm]="formGroup"></rci-edit-item-properties>
+    </mat-tab>
+    <mat-tab label="Attribute" [disabled]="!isEquipment" matTooltip="Nur Ausrüstungsgegenstände können Attribute besitzen.">
+      <rci-edit-item-attributes [parentForm]="formGroup"></rci-edit-item-attributes>
+    </mat-tab>
+  </mat-tab-group>
+</form>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="saveItem()" [disabled]="formGroup.invalid">Speichern</button>
+  <button mat-button mat-dialog-close>Abbrechen</button>
+</mat-dialog-actions>

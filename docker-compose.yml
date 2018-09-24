@@ -14,7 +14,7 @@ services:
   faldoria-web:
     build: ./client
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
     expose:
       - "4200"
     ports:
@@ -26,6 +26,6 @@ services:
     build: ./server
     hostname: faldoria-api
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
     expose:
       - "3000"

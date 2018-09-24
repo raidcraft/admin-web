@@ -13,7 +13,12 @@ export class ScopeGuard implements CanActivate {
 
     const scopes = (route.data as any).scopes;
 
-    if (!this.auth.isAuthenticated() || !this.auth.userHasScopes(...scopes)) {
+    if (!this.auth.isAuthenticated()) {
+      this.auth.login();
+      return false;
+    }
+
+    if (!this.auth.userHasScopes(...scopes)) {
       this.router.navigate(['']);
       return false;
     }

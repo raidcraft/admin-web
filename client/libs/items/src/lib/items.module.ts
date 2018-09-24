@@ -13,6 +13,7 @@ import { KeysPipe } from './pipes/keys.pipe';
 import { EditWeaponPropertiesComponent } from './components/edit-weapon-properties/edit-weapon-properties.component';
 import { EditArmorPropertiesComponent } from './components/edit-armor-properties/edit-armor-properties.component';
 import { EditEquipmentPropertiesComponent } from './components/edit-equipment-properties/edit-equipment-properties.component';
+import { ItemFormComponent } from './components/item-form/item-form.component';
 
 export const MATERIAL_IMPORTS = [
   MatTableModule,
@@ -51,7 +52,8 @@ export const MATERIAL_IMPORTS = [
     EditItemAttributesComponent,
     EditWeaponPropertiesComponent,
     EditArmorPropertiesComponent,
-    EditEquipmentPropertiesComponent
+    EditEquipmentPropertiesComponent,
+    ItemFormComponent
   ],
   entryComponents: [
     CreateItemDialogComponent

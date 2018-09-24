@@ -4,6 +4,7 @@
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/items" *ngIf="auth.userHasScopes('read:items')">Items</a>
+      <a mat-list-item routerLink="/art" *ngIf="auth.userHasScopes('read:art')">ART</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

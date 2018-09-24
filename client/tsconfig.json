@@ -24,6 +24,12 @@
       ],
       "@faldoria/core": [
         "libs/core/src/index.ts"
+      ],
+      "@faldoria/actionapi": [
+        "libs/actionapi/src/index.ts"
+      ],
+      "@faldoria/art": [
+        "libs/art/src/index.ts"
       ]
     }
   },

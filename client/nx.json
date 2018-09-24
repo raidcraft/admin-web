@@ -19,6 +19,12 @@
     },
     "core": {
       "tags": []
+    },
+    "actionapi": {
+      "tags": []
+    },
+    "art": {
+      "tags": []
     }
   }
 }

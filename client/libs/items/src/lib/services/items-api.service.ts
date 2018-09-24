@@ -12,6 +12,19 @@ export class ItemsApiService {
 
   private readonly BASE_URL = '/api/items';
 
+  static createItem(data: any): RCItem {
+    switch (data.itemType) {
+      case "WEAPON":
+        return new RCWeapon(data);
+      case "ARMOR":
+        return new RCArmor(data);
+      case "EQUIPMENT":
+        return new RCEquipment(data);
+      default:
+        return new RCItem(data);
+    }
+  }
+
   constructor(private http: HttpClient) { }
 
   getAllItems(): Observable<RCItem[]> {

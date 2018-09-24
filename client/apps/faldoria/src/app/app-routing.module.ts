@@ -14,6 +14,14 @@ export const routes: Route[] = [
       scopes: ['read:items']
     }
   },
+  {
+    path: 'art',
+    loadChildren: '../../../../libs/art/src/lib/art.module#ArtModule',
+    canActivate: [ScopeGuard],
+    data: {
+      scopes: ['read:art']
+    }
+  },
   { path: '**', redirectTo: 'home' }
 ];
 

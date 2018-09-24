@@ -195,6 +195,62 @@
           }
         }
       }
+    },
+    "actionapi": {
+      "root": "libs/actionapi",
+      "sourceRoot": "libs/actionapi/src",
+      "projectType": "library",
+      "prefix": "faldoria",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/actionapi/src/test.ts",
+            "tsConfig": "libs/actionapi/tsconfig.spec.json",
+            "karmaConfig": "libs/actionapi/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/actionapi/tsconfig.lib.json",
+              "libs/actionapi/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "art": {
+      "root": "libs/art",
+      "sourceRoot": "libs/art/src",
+      "projectType": "library",
+      "prefix": "faldoria",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/art/src/test.ts",
+            "tsConfig": "libs/art/tsconfig.spec.json",
+            "karmaConfig": "libs/art/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/art/tsconfig.lib.json",
+              "libs/art/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -8,7 +8,6 @@ import { raidcraftItemsListSchema, minecraftItemsListSchema, raidCraftItemSchema
 import { map, tap } from "rxjs/operators";
 import { ItemsApiService } from "../services/items-api.service";
 import { isNullOrUndefined } from "util";
-import { ItemsService } from "../services";
 
 export interface ItemsStateModel {
   entities: {
@@ -50,7 +49,7 @@ export class ItemsState implements NgxsOnInit {
     if (isNullOrUndefined(state.editedItemId)) {
       return null;
     }
-    return ItemsService.createItem(denormalize(state.editedItemId, raidCraftItemSchema, state.entities));
+    return ItemsApiService.createItem(denormalize(state.editedItemId, raidCraftItemSchema, state.entities));
   }
 
   constructor(private minecraftData: MinecraftDataService, private itemsApi: ItemsApiService) { }

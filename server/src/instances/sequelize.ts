@@ -12,8 +12,6 @@ export interface DbConfig {
 
 const dbConfig = config.get<DbConfig>('db');
 
-logger.info(`Connecting to database ${dbConfig.user}:${dbConfig.password}@${dbConfig.server}:${dbConfig.port} --> ${dbConfig.database}`)
-
 export const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
   dialect: 'mysql',
   host: dbConfig.server,

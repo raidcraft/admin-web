@@ -21,19 +21,6 @@ export class ItemsService {
   @Select(ItemsState.editingItem)
   editingItem$: Observable<RCItem>;
 
-  static createItem(data: any): RCItem {
-    switch (data.itemType) {
-      case "WEAPON":
-        return new RCWeapon(data);
-      case "ARMOR":
-        return new RCArmor(data);
-      case "EQUIPMENT":
-        return new RCEquipment(data);
-      default:
-        return new RCItem(data);
-    }
-  }
-
   constructor(private store: Store) { }
 
   createItem(item: RCItem) {

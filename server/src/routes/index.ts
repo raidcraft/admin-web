@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { PlayersRoute } from './players';
 import { BaseRoute } from './route';
 import { ItemsRoute } from './items';
+import { ActionApiRoute } from './art';
 
 /**
  * / route
@@ -47,6 +48,7 @@ export class ApiRoutes extends BaseRoute {
     this.router.get('/', this.get);
     this.router.use(PlayersRoute.path, PlayersRoute.router);
     this.router.use(ItemsRoute.path, ItemsRoute.router);
+    this.router.use(ActionApiRoute.path, ActionApiRoute.router);
   }
 
   /**

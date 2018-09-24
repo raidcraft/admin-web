@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, Host } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, ControlContainer, FormGroupDirective, AbstractControl } from '@angular/forms';
-import { RCItem, ItemType, ItemQuality, ItemBindType, keyFromValue } from '../../models';
+import { RCItem, ItemType, ItemQuality, ItemBindType, keyFromValue, MinecraftItem } from '../../models';
 import { ItemsService } from '../../services';
 import { MatSelectChange } from '@angular/material';
 import { map } from 'rxjs/operators';
+import { isNullOrUndefined } from 'util';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'rci-edit-item-general',
@@ -12,6 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class EditItemGeneralComponent implements OnInit {
 
+  @Input() item: RCItem = null;
   @Input() parentForm: FormGroup;
 
   itemTypes = ItemType;
@@ -26,6 +29,15 @@ export class EditItemGeneralComponent implements OnInit {
   ngOnInit() {
     this.parentForm.addControl('general', this.initForm());
     this.formGroup = this.parentForm.get('general') as FormGroup;
+    if (!isNullOrUndefined(this.item)) {
+      this.formGroup.patchValue({
+        name: this.item.name,
+        minecraftItem: this.item.minecraftItem,
+        quality: this.item.quality,
+        bindType: this.item.bindType,
+        itemType: this.item.itemType
+      });
+    }
   }
 
   initForm(): FormGroup {
@@ -39,8 +51,12 @@ export class EditItemGeneralComponent implements OnInit {
   }
 
   validateNameNotTaken(control: AbstractControl) {
-    return this.items.isExistingItem(control.value).pipe(
+    return this.item.name === control.value ? of(null) : this.items.isExistingItem(control.value).pipe(
       map(res => res ? { nameTaken: true } : null)
     );
+  }
+
+  compareMinecraftItem(item1: MinecraftItem, item2: MinecraftItem): boolean {
+    return item1.id === item2.id;
   }
 }

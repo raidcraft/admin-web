@@ -27,4 +27,15 @@ export class RCEquipment extends RCItem {
       attributes: this.attributes.map(attribute => attribute.toApiFormat())
     }
   }
+
+  toFormFormat(): any {
+    return {
+      ...super.toFormFormat(),
+      equipment: {
+        equipmentSlot: this.equipmentSlot,
+        durability: this.durability,
+        attributes: this.attributes
+      }
+    };
+  }
 }

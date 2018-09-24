@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { WeaponType } from '../../models';
+import { WeaponType, RCWeapon } from '../../models';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'rci-edit-weapon-properties',
@@ -9,6 +10,7 @@ import { WeaponType } from '../../models';
 })
 export class EditWeaponPropertiesComponent implements OnInit {
 
+  @Input() item: RCWeapon = null;
   @Input() parentForm: FormGroup;
 
   weaponTypes = WeaponType;
@@ -19,6 +21,9 @@ export class EditWeaponPropertiesComponent implements OnInit {
   ngOnInit() {
     this.parentForm.addControl('weapon', this.initForm());
     this.formGroup = this.parentForm.get('weapon') as FormGroup;
+    if (!isNullOrUndefined(this.item)) {
+      this.formGroup.patchValue(this.item.toFormFormat().weapon);
+    }
   }
 
   initForm(): FormGroup {

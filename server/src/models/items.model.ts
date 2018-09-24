@@ -2,6 +2,7 @@ import * as Sequelize from 'sequelize';
 import { sequelize } from '../instances/sequelize';
 
 export interface ITemsAddModel {
+  id: number;
   name: string;
   lore: string;
   minecraft_item: string;

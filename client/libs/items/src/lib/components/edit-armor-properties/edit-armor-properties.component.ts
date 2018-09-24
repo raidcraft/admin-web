@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ArmorType } from '../../models';
+import { ArmorType, RCArmor } from '../../models';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'rci-edit-armor-properties',
@@ -9,6 +10,7 @@ import { ArmorType } from '../../models';
 })
 export class EditArmorPropertiesComponent implements OnInit {
 
+  @Input() item: RCArmor = null;
   @Input() parentForm: FormGroup;
 
   armorTypes = ArmorType;
@@ -19,6 +21,12 @@ export class EditArmorPropertiesComponent implements OnInit {
   ngOnInit() {
     this.parentForm.addControl('armor', this.initForm());
     this.formGroup = this.parentForm.get('armor') as FormGroup;
+    if (!isNullOrUndefined(this.item)) {
+      this.formGroup.patchValue({
+        armorType: this.item.armorType,
+        armorValue: this.item.armorValue
+      });
+    }
   }
 
   initForm(): FormGroup {

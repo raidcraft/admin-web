@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
-import { RCAttribute, AttributeType } from '../../models';
+import { RCAttribute, AttributeType, RCEquipment } from '../../models';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'rci-edit-item-attributes',
@@ -9,6 +10,7 @@ import { RCAttribute, AttributeType } from '../../models';
 })
 export class EditItemAttributesComponent implements OnInit {
 
+  @Input() item: RCEquipment = null;
   @Input() parentForm: FormGroup;
 
   attributeTypes = AttributeType;
@@ -20,6 +22,10 @@ export class EditItemAttributesComponent implements OnInit {
   ngOnInit() {
     this.parentForm.addControl('attributes', this.initForm());
     this.formGroup = this.parentForm.get('attributes') as FormGroup;
+
+    if (!isNullOrUndefined(this.item)) {
+      this.item.attributes.forEach(attribute => this.addAttribute(attribute));
+    }
   }
 
   initForm(): FormGroup {
@@ -32,8 +38,8 @@ export class EditItemAttributesComponent implements OnInit {
     return group;
   }
 
-  addAttribute() {
-    this.formArray.push(this.createAttribute(new RCAttribute()));
+  addAttribute(attribute?: RCAttribute) {
+    this.formArray.push(this.createAttribute(attribute || new RCAttribute()));
   }
 
   removeAttribute(index: number) {

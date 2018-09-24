@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RCItem, ItemBindType, ItemQuality } from '../../models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'rci-edit-item-properties',
@@ -9,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EditItemPropertiesComponent implements OnInit {
 
+  @Input() item: RCItem = null;
   @Input() parentForm: FormGroup;
 
   formGroup: FormGroup;
@@ -18,6 +20,17 @@ export class EditItemPropertiesComponent implements OnInit {
   ngOnInit() {
     this.parentForm.addControl('properties', this.initForm());
     this.formGroup = this.parentForm.get('properties') as FormGroup;
+    if (!isNullOrUndefined(this.item)) {
+      this.formGroup.patchValue({
+        sellPrice: this.item.sellPrice,
+        maxStackSize: this.item.maxStackSize,
+        blockUsage: this.item.blockUsage,
+        lootable: this.item.lootable,
+        enchantmentEffect: this.item.enchantmentEffect,
+        lore: this.item.lore,
+        info: this.item.info
+      });
+    }
   }
 
   initForm(): FormGroup {

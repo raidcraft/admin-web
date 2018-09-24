@@ -23,6 +23,7 @@ export class ItemsTableComponent implements OnInit {
   private _items: RCItem[] = [];
 
   @Output() delete = new EventEmitter<number>();
+  @Output() edit = new EventEmitter<number>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -55,5 +56,9 @@ export class ItemsTableComponent implements OnInit {
 
   deleteItem(id: number) {
     this.delete.emit(id);
+  }
+
+  editItem(id: number) {
+    this.edit.emit(id);
   }
 }

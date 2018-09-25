@@ -51,7 +51,7 @@ export class EditItemGeneralComponent implements OnInit {
   }
 
   validateNameNotTaken(control: AbstractControl) {
-    return this.item.name === control.value ? of(null) : this.items.isExistingItem(control.value).pipe(
+    return !isNullOrUndefined(this.item) && this.item.name === control.value ? of(null) : this.items.isExistingItem(control.value).pipe(
       map(res => res ? { nameTaken: true } : null)
     );
   }

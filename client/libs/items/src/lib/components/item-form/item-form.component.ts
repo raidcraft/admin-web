@@ -37,7 +37,7 @@ export class ItemFormComponent {
 
   buildModel(): RCItem {
     const form = this.formGroup.value;
-    const data = { id: this.item.id, ...form.general, ...form.properties };
+    const data = { id: isNullOrUndefined(this.item) ? null : this.item.id, ...form.general, ...form.properties };
 
     let item: RCItem;
 

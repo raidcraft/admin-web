@@ -57,7 +57,6 @@ export class ItemsState implements NgxsOnInit {
   ngxsOnInit(ctx: StateContext<ItemsStateModel>) {
 
     return ctx.dispatch([
-      new LoadMinecraftItemsAction(),
       new LoadRaidCraftItemsAction()
     ]);
   }

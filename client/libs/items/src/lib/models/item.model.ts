@@ -7,7 +7,7 @@ export class RCItem {
   id: number;
   name: string;
   categories: RCItemCategory[] = [];
-  minecraftItem: MinecraftItem;
+  minecraftItem: string;
   itemLevel: number;
   lore: string;
   maxStackSize: number;
@@ -24,7 +24,7 @@ export class RCItem {
     if (data) {
       this.id = data.id;
       this.name = data.name;
-      this.minecraftItem = new MinecraftItem(data.minecraftItem || data);
+      this.minecraftItem = data.minecraftItem || data.minecraft_item;
       this.itemLevel = data.itemLevel || data.item_level;
       this.lore = data.lore;
       this.quality = data.quality;
@@ -46,8 +46,7 @@ export class RCItem {
   toApiFormat(): any {
     return {
       name: this.name,
-      minecraft_item: this.minecraftItem.type,
-      minecraft_data_dalue: this.minecraftItem.meta,
+      minecraft_item: this.minecraftItem,
       item_level: this.itemLevel,
       lore: this.lore,
       quality: this.quality,
@@ -66,7 +65,7 @@ export class RCItem {
     return {
       general: {
         name: this.name,
-        minecraftItem: this.minecraftItem.id,
+        minecraftItem: this.minecraftItem,
         quality: this.quality,
         bindType: this.bindType,
         itemType: this.itemType

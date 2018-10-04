@@ -9,12 +9,13 @@
       <mat-error>Bitte gebe einen Namen für das Item an.</mat-error>
     </ng-template>
   </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" formControlName="minecraftItem" placeholder="Minecraft Item">
+    <mat-hint>Gebe die ID eines <a href="https://minecraftitemids.com/">Minecraft Items</a> an.</mat-hint>
+    <mat-error>Bitte wähle ein Minecraft Item aus.</mat-error>
+  </mat-form-field>
+
   <section fxLayout="row wrap" fxLayoutGap="5px">
-    <mat-form-field>
-      <input matInput type="text" formControlName="minecraftItem" placeholder="Minecraft Item">
-      <mat-hint>Gebe die ID eines <a href="https://minecraftitemids.com/">Minecraft Items</a> an.</mat-hint>
-      <mat-error>Bitte wähle ein Minecraft Item aus.</mat-error>
-    </mat-form-field>
     <mat-form-field>
       <mat-select formControlName="itemType" placeholder="Item Typ">
         <mat-option *ngFor="let itemType of itemTypes | keys" [value]="itemType">
@@ -24,9 +25,6 @@
       <mat-hint>Der Item Typ definiert spezielle Eigenschaften.</mat-hint>
       <mat-error>Bitte wähle einen Item Typ aus.</mat-error>
     </mat-form-field>
-  </section>
-
-  <section fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field>
       <mat-select formControlName="quality" placeholder="Qualität">
         <mat-option *ngFor="let quality of qualities | keys" [value]="quality">

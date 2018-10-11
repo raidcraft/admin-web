@@ -43,7 +43,7 @@ export class EditItemGeneralComponent implements OnInit {
   initForm(): FormGroup {
     return this.fb.group({
       name: this.fb.control('', Validators.required, this.validateNameNotTaken.bind(this)),
-      minecraftItem: this.fb.control(null, Validators.required),
+      minecraftItem: this.fb.control(null, Validators.pattern('[a-zA-Z:_\-\.]*')),
       quality: this.fb.control("COMMON", Validators.required),
       bindType: this.fb.control("NONE", Validators.required),
       itemType: this.fb.control(null, Validators.required)

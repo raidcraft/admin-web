@@ -31,7 +31,8 @@ export class RCConsumeable extends RCItem {
       percentage: this.percentage,
       instant: this.instant,
       intervall: this.interval,
-      duration: this.duration
+      duration: this.duration,
+      type: this.type
     }
   }
 
@@ -44,7 +45,8 @@ export class RCConsumeable extends RCItem {
         percentage: this.percentage,
         instant: this.instant,
         interval: this.interval,
-        duration: this.duration
+        duration: this.duration,
+        type: this.type
       }
     }
   }

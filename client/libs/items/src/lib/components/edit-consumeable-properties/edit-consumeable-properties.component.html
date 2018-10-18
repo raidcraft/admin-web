@@ -1,0 +1,41 @@
+<h3>Consumeable Eigenschaften</h3>
+<mat-divider></mat-divider>
+<div [formGroup]="formGroup" fxLayout="column wrap">
+  <section fyLayout="row" fxLayoutGap="5px">
+    <mat-form-field>
+      <mat-select formControlName="type" placeholder="Consumeable Type">
+        <mat-option *ngFor="let type of consumeableTypes | keys" [value]="type">
+          {{ consumeableTypes[type] }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="resourceGain" type="number" placeholder="Wert">
+      <mat-hint>Wenn in Prozent angegeben ist 0.1 gleich 10%.</mat-hint>
+    </mat-form-field>
+    <mat-form-field *ngIf="isAttribute">
+      <mat-select formControlName="resourceName" placeholder="Attribut">
+        <mat-option *ngFor="let attributeType of attributeTypes | keys" [value]="attributeType">
+          {{ attributeTypes[attributeType] }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="!isHealth && !isAttribute">
+      <input matInput formControlName="resourceName" type="text" placeholder="Ressoucen Name">
+    </mat-form-field>
+  </section>
+  <section fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="space-between start">
+    <mat-checkbox formControlName="instant">Sofort verzerhbar</mat-checkbox>
+    <mat-checkbox formControlName="percentage">Wert in Prozent</mat-checkbox>
+  </section>
+    <section *ngIf="!isInstant" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between start">
+      <mat-form-field fxFlex>
+        <input matInput formControlName="duration" type="text" placeholder="Dauer">
+        <mat-hint>Die Dauer des Effekts in 1h20m30s</mat-hint>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput formControlName="interval" type="text" placeholder="Intervall">
+        <mat-hint>Das Intervall in 30s. Kann 0 sein.</mat-hint>
+      </mat-form-field>
+    </section>
+</div>

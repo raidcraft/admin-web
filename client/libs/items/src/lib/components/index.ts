@@ -2,6 +2,7 @@
 export * from './create-item-dialog';
 export * from './edit-armor-properties';
 export * from './edit-equipment-properties';
+export * from './edit-consumeable-properties';
 export * from './edit-item-attributes';
 export * from './edit-item-dialog';
 export * from './edit-item-general';

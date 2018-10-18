@@ -75,8 +75,14 @@ export enum AttributeType {
   STRENGTH = 'Stärke',
   AGILITY = 'Beweglichkeit',
   STAMINA = 'Ausdauer',
-  INTELLECT = 'Lntelligenz',
+  INTELLECT = 'Intelligenz',
   SPIRIT = 'Willenskraft'
+}
+
+export enum ConsumeableType {
+  HEALTH = 'Leben',
+  RESOURCE = 'Ressource',
+  ATTRIBUTE = 'Attribut'
 }
 
 export function keyFromValue(stringEnum: { [key: string]: string }, value: string): string | undefined {

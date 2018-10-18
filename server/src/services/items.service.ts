@@ -2,6 +2,7 @@ import { Items, ITemsAddModel, IEquipmentAddModel, Equipment, IItemsModel, IEqui
 import { Armor, IArmorAddModel } from 'models/armor.model';
 import { Weapon, IWeaponAddModel } from 'models/weapon.model';
 import { Attributes } from 'models/attribute.model';
+import { IConsumeableAddModel, Consumeable } from '@/models/consumeable.model';
 
 export class ItemsService {
 
@@ -24,19 +25,21 @@ export class ItemsService {
 
   public getAll() {
     return Items.all({
-      include: [this.itemInclude]
+      include: [this.itemInclude, { model: Consumeable, as: 'consumeable' }]
     });
   }
 
   public getItemById(id: number) {
     return Items.findById(id, {
-      include: [this.itemInclude]
+      include: [this.itemInclude, {model: Consumeable, as: 'consumeable'}]
     });
   }
 
   public async createItem(item: ITemsAddModel) {
     const result = await Items.create(item).then(async model => {
       switch (model.item_type) {
+        case 'CONSUMEABLE':
+          return await this.createConsumeable(item, model).then(() => model);
         case 'EQUIPMENT':
           return await this.createEquipment(item, model).then(() => model);
         case 'ARMOR':
@@ -70,6 +73,14 @@ export class ItemsService {
       model.attributes = (model.attributes && model.attributes
         .map(attribute => ({ ...attribute, equipment_id: equipment.id }))) || [];
       return Attributes.bulkCreate(model.attributes).then(() => equipment);
+    });
+  }
+
+  private createConsumeable(item: ITemsAddModel, dbEntry: IItemsModel) {
+    const model = item as IConsumeableAddModel;
+    return Consumeable.create({
+      ...model,
+      item_id: dbEntry.id,
     });
   }
 

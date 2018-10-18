@@ -3,6 +3,7 @@
     <mat-tab label="Allgemein">
       <rci-edit-item-general [item]="item" [parentForm]="formGroup"></rci-edit-item-general>
       <rci-edit-equipment-properties *ngIf="isEquipment" [item]="item" [parentForm]="formGroup"></rci-edit-equipment-properties>
+      <rci-edit-consumeable-properties *ngIf="isConsumeable" [item]="item" [parentForm]="formGroup"></rci-edit-consumeable-properties>
       <ng-container [ngSwitch]="itemType">
         <rci-edit-armor-properties *ngSwitchCase="itemTypes.ARMOR" [item]="item" [parentForm]="formGroup"></rci-edit-armor-properties>
         <rci-edit-weapon-properties *ngSwitchCase="itemTypes.WEAPON" [item]="item" [parentForm]="formGroup"></rci-edit-weapon-properties>

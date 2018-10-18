@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output, Input, AfterViewInit } from '@
 import { FormGroup } from '@angular/forms';
 import { ItemType, RCArmor, RCEquipment, RCItem, RCWeapon } from '../../models';
 import { isNullOrUndefined } from 'util';
+import { RCConsumeable } from '../../models/consumeable.model';
 
 @Component({
   selector: 'rci-item-form',
@@ -29,6 +30,10 @@ export class ItemFormComponent {
       || this.itemType === ItemType.WEAPON;
   }
 
+  get isConsumeable() {
+    return this.itemType === ItemType.CONSUMEABLE;
+  }
+
   constructor() { }
 
   saveItem() {
@@ -50,6 +55,9 @@ export class ItemFormComponent {
         break;
       case ItemType.EQUIPMENT:
         item = new RCEquipment({ ...data, ...form.attributes, ...form.equipment });
+        break;
+      case ItemType.CONSUMEABLE:
+        item = new RCConsumeable({ ...data, ...form.consumeable })
         break;
       default:
         item = new RCItem(data);

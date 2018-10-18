@@ -18,7 +18,7 @@ export class RCConsumeable extends RCItem {
       this.resourceGain = data.resourceGain || data.resource_gain;
       this.percentage = data.percentage;
       this.instant = data.instant;
-      this.interval = data.interval;
+      this.interval = data.interval || data.intervall;
       this.duration = data.duration;
     }
   }
@@ -30,7 +30,7 @@ export class RCConsumeable extends RCItem {
       resource_gain: this.resourceGain,
       percentage: this.percentage,
       instant: this.instant,
-      interval: this.interval,
+      intervall: this.interval,
       duration: this.duration
     }
   }

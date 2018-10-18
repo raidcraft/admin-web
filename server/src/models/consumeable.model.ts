@@ -10,7 +10,7 @@ export interface IConsumeableAddModel extends ITemsAddModel {
   resource_gain: number;
   percentage: boolean;
   instant: boolean;
-  interval: string;
+  intervall: string;
   duration: string;
 }
 
@@ -48,7 +48,7 @@ export const Consumeable = sequelize.define<IConsumeableModel, IConsumeableAddMo
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
-  interval: {
+  intervall: {
     type: Sequelize.STRING,
     defaultValue: null
   },

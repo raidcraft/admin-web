@@ -28,7 +28,6 @@ export class EditWeaponPropertiesComponent implements OnInit {
 
   initForm(): FormGroup {
     return this.fb.group({
-      weaponType: this.fb.control(null, Validators.required),
       minDamage: this.fb.control(0, Validators.min(1)),
       maxDamage: this.fb.control(0, Validators.min(1)),
       swingTime: this.fb.control(1.0, Validators.required)

@@ -18,7 +18,7 @@ export class EditItemPropertiesComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.parentForm.addControl('properties', this.initForm());
+    this.parentForm.setControl('properties', this.initForm());
     this.formGroup = this.parentForm.get('properties') as FormGroup;
     if (!isNullOrUndefined(this.item)) {
       this.formGroup.patchValue({

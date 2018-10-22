@@ -1,7 +1,14 @@
 <rci-items-table (edit)="openEditItemDialog($event)" (delete)="onDeleteItem($event)" [items]="items.items$ | async"></rci-items-table>
 
+
+<div *ngIf="auth.userHasScopes('write:items')" class="mini-fab-container">
+  <button mat-mini-fab color="primary" routerLink="/items/wizard" fxFlex>
+    <mat-icon>flare</mat-icon>
+  </button>
+</div>
+
 <div *ngIf="auth.userHasScopes('write:items')" class="fab-container">
-  <button mat-fab color="accent" (click)="openCreateItemDialog()">
+  <button mat-fab color="accent" (click)="openCreateItemDialog()" fxFlex>
     <mat-icon>add</mat-icon>
   </button>
 </div>

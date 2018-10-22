@@ -20,7 +20,7 @@ export class EditItemAttributesComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.parentForm.addControl('attributes', this.initForm());
+    this.parentForm.setControl('attributes', this.initForm());
     this.formGroup = this.parentForm.get('attributes') as FormGroup;
 
     if (!isNullOrUndefined(this.item)) {

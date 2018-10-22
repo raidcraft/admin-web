@@ -9,6 +9,8 @@ export * from './edit-item-general';
 export * from './edit-item-properties';
 export * from './edit-weapon-properties';
 export * from './item-form';
+export * from './item-wizard';
 export * from './items-table';
+export * from './attribute-table';
 // end:ng42.barrel
 

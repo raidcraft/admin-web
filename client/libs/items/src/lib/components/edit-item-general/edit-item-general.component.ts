@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Host } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, ControlContainer, FormGroupDirective, AbstractControl } from '@angular/forms';
-import { RCItem, ItemType, ItemQuality, ItemBindType, keyFromValue, MinecraftItem } from '../../models';
+import { RCItem, ItemType, ItemQuality, ItemBindType, keyFromValue, MinecraftItem, ArmorType, WeaponType, EquipmentSlot } from '../../models';
 import { ItemsService } from '../../services';
 import { MatSelectChange } from '@angular/material';
 import { map } from 'rxjs/operators';
@@ -20,14 +20,61 @@ export class EditItemGeneralComponent implements OnInit {
   itemTypes = ItemType;
   qualities = ItemQuality;
   bindTypes = ItemBindType;
+  equipmentSlots = EquipmentSlot;
+  armorTypes = ArmorType;
+  weaponTypes = WeaponType;
+
   formGroup: FormGroup;
+
+  get itemQuality() {
+    return this.formGroup.get('quality').value;
+  }
+
+  get itemType() {
+    const itemType = this.formGroup.get('itemType');
+    return itemType && ItemType[itemType.value];
+  }
+
+  get bindType() {
+    return this.formGroup.get('bindType').value;
+  }
+
+  get isEquipment(): boolean {
+    return this.itemType === ItemType.ARMOR
+      || this.itemType === ItemType.EQUIPMENT
+      || this.itemType === ItemType.WEAPON;
+  }
+
+  get isArmor(): boolean {
+    return this.itemType === ItemType.ARMOR;
+  }
+
+  get isWeapon(): boolean {
+    return this.itemType === ItemType.WEAPON;
+  }
+
+  get isConsumeable(): boolean {
+    return this.itemType === ItemType.CONSUMEABLE;
+  }
+
+  get weaponType() {
+    return this.formGroup.get('weaponType').value;
+  }
+
+  get armorType() {
+    return this.formGroup.get('armorType').value;
+  }
+
+  get equipmentSlot() {
+    return this.formGroup.get('equipmentSlot').value;
+  }
 
   constructor(private fb: FormBuilder,
     public items: ItemsService) {
   }
 
   ngOnInit() {
-    this.parentForm.addControl('general', this.initForm());
+    this.parentForm.setControl('general', this.initForm());
     this.formGroup = this.parentForm.get('general') as FormGroup;
     if (!isNullOrUndefined(this.item)) {
       this.formGroup.patchValue({
@@ -43,10 +90,13 @@ export class EditItemGeneralComponent implements OnInit {
   initForm(): FormGroup {
     return this.fb.group({
       name: this.fb.control('', Validators.required, this.validateNameNotTaken.bind(this)),
-      minecraftItem: this.fb.control(null, Validators.pattern('[a-zA-Z:_]*')),
+      minecraftItem: this.fb.control(null, Validators.pattern('[a-zA-Z:_]+')),
       quality: this.fb.control("COMMON", Validators.required),
       bindType: this.fb.control("NONE", Validators.required),
-      itemType: this.fb.control(null, Validators.required)
+      itemType: this.fb.control(null, Validators.required),
+      equipmentSlot: this.fb.control(null),
+      armorType: this.fb.control(null),
+      weaponType: this.fb.control(null)
     });
   }
 

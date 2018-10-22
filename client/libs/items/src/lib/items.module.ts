@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatIconModule, MatInputModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatSortModule, MatTableModule, MatTabsModule, MatTooltipModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatDividerModule, MatIconModule, MatInputModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatSortModule, MatTableModule, MatTabsModule, MatTooltipModule, MatCardModule, MatStepperModule } from '@angular/material';
 import { NgxsModule } from '@ngxs/store';
-import { CreateItemDialogComponent, EditArmorPropertiesComponent, EditEquipmentPropertiesComponent, EditItemAttributesComponent, EditItemGeneralComponent, EditItemPropertiesComponent, EditWeaponPropertiesComponent, ItemFormComponent, ItemsTableComponent, EditItemDialogComponent, EditConsumeablePropertiesComponent } from './components';
+import { CreateItemDialogComponent, EditArmorPropertiesComponent, EditEquipmentPropertiesComponent, EditItemAttributesComponent, EditItemGeneralComponent, EditItemPropertiesComponent, EditWeaponPropertiesComponent, ItemFormComponent, ItemsTableComponent, EditItemDialogComponent, EditConsumeablePropertiesComponent, AttributeTableComponent } from './components';
 import { ItemsRoutingModule } from './items-routing.module';
 import { ItemsComponent } from './pages';
 import { KeysPipe } from './pipes/keys.pipe';
 import { ItemsState } from './store/items.state';
+import { ItemWizardComponent } from './components/item-wizard/item-wizard.component';
 
 export const MATERIAL_IMPORTS = [
   MatTableModule,
@@ -25,7 +26,9 @@ export const MATERIAL_IMPORTS = [
   CdkTableModule,
   MatTooltipModule,
   MatDividerModule,
-  MatMenuModule
+  MatMenuModule,
+  MatCardModule,
+  MatStepperModule
 ];
 
 @NgModule({
@@ -51,11 +54,14 @@ export const MATERIAL_IMPORTS = [
     EditEquipmentPropertiesComponent,
     EditConsumeablePropertiesComponent,
     ItemFormComponent,
-    EditItemDialogComponent
+    EditItemDialogComponent,
+    ItemWizardComponent,
+    AttributeTableComponent
   ],
   entryComponents: [
     CreateItemDialogComponent,
     EditItemDialogComponent
-  ]
+  ],
+  providers: []
 })
 export class ItemsModule { }

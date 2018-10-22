@@ -17,7 +17,6 @@ export enum ItemType {
 }
 
 export enum ItemBindType {
-  SOULBOUND = 'Seelengebunden',
   BOE = 'Bind on Equip',
   BOP = 'Bind on Pickup',
   QUEST = 'Quest Item',

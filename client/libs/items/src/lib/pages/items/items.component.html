@@ -1,14 +1,11 @@
+<section *ngIf="auth.userHasScopes('write:items')">
+  <button mat-button (click)="openCreateItemDialog()">
+    <mat-icon>add</mat-icon>&nbsp;Neues Item
+  </button>
+  <button mat-raised-button color="primary" routerLink="/items/wizard">
+    <mat-icon>flare</mat-icon>&nbsp;Item Wizard
+  </button>
+  <mat-divider></mat-divider>
+  <br>
+</section>
 <rci-items-table (edit)="openEditItemDialog($event)" (delete)="onDeleteItem($event)" [items]="items.items$ | async"></rci-items-table>
-
-
-<div *ngIf="auth.userHasScopes('write:items')" class="mini-fab-container">
-  <button mat-mini-fab color="primary" routerLink="/items/wizard" fxFlex>
-    <mat-icon>flare</mat-icon>
-  </button>
-</div>
-
-<div *ngIf="auth.userHasScopes('write:items')" class="fab-container">
-  <button mat-fab color="accent" (click)="openCreateItemDialog()" fxFlex>
-    <mat-icon>add</mat-icon>
-  </button>
-</div>

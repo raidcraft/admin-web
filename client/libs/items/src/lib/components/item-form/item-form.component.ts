@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input, AfterViewInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ItemType, RCArmor, RCEquipment, RCItem, RCWeapon } from '../../models';
 import { isNullOrUndefined } from 'util';
 import { RCConsumeable } from '../../models/consumeable.model';
@@ -9,7 +9,7 @@ import { RCConsumeable } from '../../models/consumeable.model';
   templateUrl: './item-form.component.html',
   styleUrls: ['./item-form.component.scss']
 })
-export class ItemFormComponent {
+export class ItemFormComponent implements OnInit {
 
   @Input() item: RCItem = null;
   @Output() save = new EventEmitter<RCItem>();
@@ -34,7 +34,13 @@ export class ItemFormComponent {
     return this.itemType === ItemType.CONSUMEABLE;
   }
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.formGroup = this.fb.group({
+      itemLevel: this.fb.control(1, Validators.required)
+    });
+  }
 
   saveItem() {
     this.save.emit(this.buildModel());
@@ -42,7 +48,7 @@ export class ItemFormComponent {
 
   buildModel(): RCItem {
     const form = this.formGroup.value;
-    const data = { id: isNullOrUndefined(this.item) ? null : this.item.id, ...form.general, ...form.properties };
+    const data = { id: isNullOrUndefined(this.item) ? null : this.item.id, itemLevel: form.itemLevel, ...form.general, ...form.properties };
 
     let item: RCItem;
 

@@ -1,6 +1,9 @@
 <form [formGroup]="formGroup">
   <mat-tab-group>
     <mat-tab label="Allgemein">
+      <mat-form-field>
+        <input matInput formControlName="itemLevel" placeholder="Item Level">
+      </mat-form-field>
       <rci-edit-item-general [item]="item" [parentForm]="formGroup"></rci-edit-item-general>
       <rci-edit-equipment-properties *ngIf="isEquipment" [item]="item" [parentForm]="formGroup"></rci-edit-equipment-properties>
       <rci-edit-consumeable-properties *ngIf="isConsumeable" [item]="item" [parentForm]="formGroup"></rci-edit-consumeable-properties>

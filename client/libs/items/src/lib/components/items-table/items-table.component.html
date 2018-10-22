@@ -23,6 +23,12 @@
       <mat-cell *matCellDef="let row">{{row.minecraftItem}}</mat-cell>
     </ng-container>
 
+    <!-- Level Column -->
+    <ng-container matColumnDef="level">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Level</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.itemLevel}}</mat-cell>
+    </ng-container>
+
     <!-- Type Column -->
     <ng-container matColumnDef="type">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Item Typ</mat-header-cell>

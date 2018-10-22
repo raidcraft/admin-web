@@ -35,7 +35,7 @@ export class ItemsTableComponent implements OnInit {
   bindTypes = ItemBindType;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'minecraft_item', 'type', 'quality', 'bind_type', 'action'];
+  displayedColumns = ['id', 'name', 'minecraft_item', 'level', 'type', 'quality', 'bind_type', 'action'];
 
   constructor() {
     this.dataSource = new MatTableDataSource(this.items);

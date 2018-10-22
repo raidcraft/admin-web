@@ -39,7 +39,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <section fxFlex *ngIf="isEquipment" fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="space-between center">
+    <section fxFlex="100" *ngIf="isEquipment" fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="space-between center">
       <mat-form-field fxFlex="30">
         <mat-select formControlName="equipmentSlot" placeholder="Ausrüstungsslot" required>
           <mat-option *ngFor="let slot of equipmentSlots | keys" [value]="slot">

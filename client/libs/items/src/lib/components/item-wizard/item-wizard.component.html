@@ -1,0 +1,116 @@
+<mat-card>
+  <form [formGroup]="formGroup">
+    <mat-horizontal-stepper linear #stepper>
+      <mat-step label="Item & Spieler Level">
+        <mat-form-field>
+          <input matInput formControlName="minLevel" placeholder="Mindest Level">
+          <mat-hint>Das mindest Level des Spielers um das Item zu tragen.</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="itemLevel" placeholder="Item Level (minLevel + 5)" [value]="this.itemLevel">
+          <mat-hint>Das Item Level ist die Grundlage für alle folgenden Berechnungen.</mat-hint>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext type="button">Weiter</button>
+        </div>
+      </mat-step>
+      <mat-step formGroupName="general" label="Allgemeine Daten">
+        <rci-edit-item-general [parentForm]="formGroup" #general></rci-edit-item-general>
+        <div>
+          <button mat-button matStepperPrevious type="button">Zurück</button>
+          <button mat-button (click)="nextStep()" type="button" [disabled]="general.formGroup.invalid">Weiter</button>
+        </div>
+      </mat-step>
+      <mat-step formGroupName="attributes" [editable]="general.isEquipment" optional label="Attribute">
+        <rci-attribute-table [budget]="budget" [parentForm]="formGroup" #attributes></rci-attribute-table>
+        <div>
+          <button mat-button matStepperPrevious type="button">Zurück</button>
+          <button mat-button matStepperNext type="button" [disabled]="attributes.formGroup.invalid">Weiter</button>
+        </div>
+      </mat-step>
+      <mat-step formGroupName="properties" label="Zusätzliche Eigenschaften" optional>
+        <rci-edit-item-properties [parentForm]="formGroup"></rci-edit-item-properties>
+        <button mat-button (click)="goBack()" type="button">Zurück</button>
+        <button mat-button matStepperNext type="button">Weiter</button>
+      </mat-step>
+      <mat-step label="Item Erstellen">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ itemName }} ({{ minecraftItem }})</mat-card-title>
+            <mat-card-subtitle>{{ lore }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-divider></mat-divider><br>
+            <div>
+              <table>
+                <tr>
+                  <td>Qualität:</td>
+                  <td><strong>{{ general.qualities[general.itemQuality] }}</strong></td>
+                </tr>
+                <tr>
+                  <td>Item Typ:</td>
+                  <td><strong>{{ general.itemType }}</strong></td>
+                </tr>
+                <tr>
+                  <td>Bindung:</td>
+                  <td><strong>{{ general.bindTypes[general.bindType] }}</strong></td>
+                </tr>
+                <tr *ngIf="general.isEquipment">
+                  <td>Equipment Slot:</td>
+                  <td><strong>{{ general.equipmentSlots[general.equipmentSlot] }}</strong></td>
+                </tr>
+              </table>
+            </div><br>
+            <div *ngIf="general.isEquipment">
+              <span *ngFor="let attribute of attributes.attributeList">
+                <strong>+{{ attribute.value }}</strong> {{ attributes.attributeTypes[attribute.attribute]}}<br>
+              </span><br>
+            </div>
+            <mat-divider></mat-divider>
+            <br>
+            <div *ngIf="general.isWeapon">
+              <mat-form-field>
+                <input matInput formControlName="attackSpeed" type="number" placeholder="Angriffs Geschwindigkeit">
+              </mat-form-field><br>
+              <table>
+                <tr>
+                  <td>Damage per Second:</td>
+                  <td><strong>{{ damagePerSecond | number:'1.2-2' }}</strong></td>
+                </tr>
+                <tr>
+                  <td>Min. Damage:</td>
+                  <td><strong>{{ minDamage | number:'1.0-0' }}</strong></td>
+                </tr>
+                <tr>
+                  <td>Max. Damage:</td>
+                  <td><strong>{{ maxDamage | number:'1.0-0' }}</strong></td>
+                </tr>
+                <tr>
+                  <td>Waffen-Typ:</td>
+                  <td><strong>{{ general.weaponTypes[general.weaponType] }}</strong></td>
+                </tr>
+              </table>
+              <br>
+            </div>
+            <div *ngIf="general.isArmor">
+              <table>
+                <tr>
+                  <td>Rüstungs-Typ:</td>
+                  <td><strong>{{ armorTypes[armorType] }}</strong></td>
+                </tr>
+                <tr>
+                  <td>Rüstungswert:</td>
+                  <td><strong>{{ armorValue | number:'1.0-0' }}</strong></td>
+                </tr>
+              </table>
+              <br>
+            </div>
+            <span *ngIf="general.isEquipment">Haltbarkeit: <strong>{{ durability | number:'1.0-0' }}</strong><br></span>
+          </mat-card-content>
+        </mat-card>
+        <button mat-button matStepperPrevious type="button">Zurück</button>
+        <button mat-raised-button color="accent" (click)="createItem()" type="button" [disabled]="formGroup.invalid">Item Erstellen</button>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+</mat-card>

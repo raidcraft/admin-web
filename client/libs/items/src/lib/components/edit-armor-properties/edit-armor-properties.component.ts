@@ -23,7 +23,6 @@ export class EditArmorPropertiesComponent implements OnInit {
     this.formGroup = this.parentForm.get('armor') as FormGroup;
     if (!isNullOrUndefined(this.item)) {
       this.formGroup.patchValue({
-        armorType: this.item.armorType,
         armorValue: this.item.armorValue
       });
     }
@@ -31,7 +30,6 @@ export class EditArmorPropertiesComponent implements OnInit {
 
   initForm(): FormGroup {
     return this.fb.group({
-      armorType: this.fb.control(null, Validators.required),
       armorValue: this.fb.control(0, Validators.min(1))
     });
   }

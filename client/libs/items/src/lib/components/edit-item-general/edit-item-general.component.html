@@ -1,6 +1,6 @@
 <div [formGroup]="formGroup" fxLayout="column wrap">
   <mat-form-field>
-    <input matInput type="text" formControlName="name" placeholder="Custom Item Name">
+    <input matInput type="text" formControlName="name" placeholder="Custom Item Name" required>
     <mat-hint>Der Name ersetzt den eigentlichen Namen des Items.</mat-hint>
     <mat-error *ngIf="formGroup.get('name').hasError('nameTaken') else nameError">
       Es gibt bereits ein Item mit diesem Namen.
@@ -10,14 +10,14 @@
     </ng-template>
   </mat-form-field>
   <mat-form-field>
-    <input matInput type="text" formControlName="minecraftItem" placeholder="Minecraft Item">
+    <input matInput type="text" formControlName="minecraftItem" placeholder="Minecraft Item" required>
     <mat-hint>Gebe die ID eines <a href="https://minecraftitemids.com/">Minecraft Items</a> an.</mat-hint>
     <mat-error>Bitte gebe eine Minecraft Item ID (keine Zahl) an.</mat-error>
   </mat-form-field>
 
-  <section fxLayout="row wrap" fxLayoutGap="5px">
-    <mat-form-field>
-      <mat-select formControlName="itemType" placeholder="Item Typ">
+  <section fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="space-between center">
+    <mat-form-field fxFlex="30">
+      <mat-select formControlName="itemType" placeholder="Item Typ" required>
         <mat-option *ngFor="let itemType of itemTypes | keys" [value]="itemType">
           {{ itemTypes[itemType] }}
         </mat-option>
@@ -25,19 +25,42 @@
       <mat-hint>Der Item Typ definiert spezielle Eigenschaften.</mat-hint>
       <mat-error>Bitte wähle einen Item Typ aus.</mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <mat-select formControlName="quality" placeholder="Qualität">
+    <mat-form-field fxFlex="30">
+      <mat-select formControlName="quality" placeholder="Qualität" required>
         <mat-option *ngFor="let quality of qualities | keys" [value]="quality">
           {{ qualities[quality] }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field>
-      <mat-select formControlName="bindType" placeholder="Bindung">
+    <mat-form-field fxFlex="30">
+      <mat-select formControlName="bindType" placeholder="Bindung" required>
         <mat-option *ngFor="let bindType of bindTypes | keys" [value]="bindType">
           {{ bindTypes[bindType] }}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <section fxFlex *ngIf="isEquipment" fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="space-between center">
+      <mat-form-field fxFlex="30">
+        <mat-select formControlName="equipmentSlot" placeholder="Ausrüstungsslot" required>
+          <mat-option *ngFor="let slot of equipmentSlots | keys" [value]="slot">
+            {{ equipmentSlots[slot] }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="isArmor" fxFlex="30">
+        <mat-select formControlName="armorType" placeholder="Rüstungstyp" required>
+          <mat-option *ngFor="let type of armorTypes | keys" [value]="type">
+            {{ armorTypes[type] }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="isWeapon" fxFlex="30">
+        <mat-select formControlName="weaponType" placeholder="Waffen Art" required>
+          <mat-option *ngFor="let type of weaponTypes | keys" [value]="type">
+            {{ weaponTypes[type] }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
   </section>
 </div>

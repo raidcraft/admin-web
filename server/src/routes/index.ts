@@ -4,6 +4,7 @@ import { PlayersRoute } from './players';
 import { BaseRoute } from './route';
 import { ItemsRoute } from './items';
 import { ActionApiRoute } from './art';
+import { DisguisesApiRoute } from './disguises';
 
 /**
  * / route
@@ -49,6 +50,7 @@ export class ApiRoutes extends BaseRoute {
     this.router.use(PlayersRoute.path, PlayersRoute.router);
     this.router.use(ItemsRoute.path, ItemsRoute.router);
     this.router.use(ActionApiRoute.path, ActionApiRoute.router);
+    this.router.use(DisguisesApiRoute.path, DisguisesApiRoute.router);
   }
 
   /**

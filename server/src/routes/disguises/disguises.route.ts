@@ -16,6 +16,9 @@ export class DisguisesApiRoute extends BaseRoute {
   private constructor() {
     super();
     this.get = this.get.bind(this);
+    this.post = this.post.bind(this);
+    this.update = this.update.bind(this);
+    this.delete = this.delete.bind(this);
     this.init();
   }
 

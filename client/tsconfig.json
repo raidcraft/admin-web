@@ -30,6 +30,9 @@
       ],
       "@faldoria/art": [
         "libs/art/src/index.ts"
+      ],
+      "@faldoria/disguises": [
+        "libs/disguises/src/index.ts"
       ]
     }
   },

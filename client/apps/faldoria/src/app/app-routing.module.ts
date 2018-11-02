@@ -22,6 +22,14 @@ export const routes: Route[] = [
       scopes: ['read:art']
     }
   },
+  {
+    path: 'disguises',
+    loadChildren: '../../../../libs/disguises/src/lib/disguises.module#DisguisesModule',
+    canActivate: [ScopeGuard],
+    data: {
+      scopes: ['read:disguises']
+    }
+  },
   { path: '**', redirectTo: 'home' }
 ];
 

@@ -25,5 +25,14 @@ export const Disguise = sequelize.define<IDisguiseModel, IDisguiseAddModel>('rc_
   skin_signature: Sequelize.STRING,
   skin_owner: Sequelize.STRING,
   skin_url: Sequelize.STRING,
-  description: Sequelize.STRING
+  description: Sequelize.STRING,
+  createdAt: {
+    type: Sequelize.DATE,
+    field: 'when_created'
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    field: 'when_modified'
+  },
+  version: Sequelize.INTEGER
 });

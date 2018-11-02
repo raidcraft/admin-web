@@ -1,0 +1,8 @@
+<section *ngIf="auth.userHasScopes('write:disguises')">
+  <button mat-raised-button color="accent" (click)="openCreateDisguiseDialog()">
+    <mat-icon>add</mat-icon>&nbsp;Neue Disguise
+  </button>
+  <mat-divider></mat-divider>
+  <br>
+</section>
+<faldoria-disguises-table [models]="disguises.models$ | async" (delete)="onDelete($event)" (create)="onCreate($event)"></faldoria-disguises-table>

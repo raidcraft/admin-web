@@ -15,7 +15,7 @@ export class DisguisesService {
   }
 
   public async update(id: number, model: IDisguiseAddModel) {
-    return await Disguise.findById(id).update(model);
+    return await (await Disguise.findById(id)).update(model);
   }
 
   public async delete(id: number) {

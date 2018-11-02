@@ -14,6 +14,7 @@
   "include": [
     "**/*.ts",
     "../../libs/items/src/index.ts",
-    "../../libs/art/src/index.ts"
+    "../../libs/art/src/index.ts",
+    "../../libs/disguises/src/index.ts"
   ]
 }

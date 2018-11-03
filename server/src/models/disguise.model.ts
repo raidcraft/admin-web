@@ -6,8 +6,10 @@ export interface IDisguiseAddModel {
   skin_texture: string;
   skin_signature: string;
   skin_owner: string;
+  skin_owner_name: string;
   skin_url: string;
   description: string;
+  mineskin_id: number;
 }
 
 export interface IDisguiseModel extends Sequelize.Model<IDisguiseModel, IDisguiseAddModel> {
@@ -24,7 +26,9 @@ export const Disguise = sequelize.define<IDisguiseModel, IDisguiseAddModel>('rc_
   skin_texture: Sequelize.STRING,
   skin_signature: Sequelize.STRING,
   skin_owner: Sequelize.STRING,
+  skin_owner_name: Sequelize.STRING,
   skin_url: Sequelize.STRING,
+  mineskin_id: Sequelize.INTEGER,
   description: Sequelize.STRING,
   createdAt: {
     type: Sequelize.DATE,
@@ -33,6 +37,8 @@ export const Disguise = sequelize.define<IDisguiseModel, IDisguiseAddModel>('rc_
   updatedAt: {
     type: Sequelize.DATE,
     field: 'when_modified'
-  },
-  version: Sequelize.INTEGER
-});
+  }
+}, {
+    timestamps: true,
+    version: true
+  });

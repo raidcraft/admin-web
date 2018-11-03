@@ -1,3 +1,54 @@
-<p>
-  disguise-form works!
-</p>
+<form (submit)="saveSkin()" [formGroup]="formGroup">
+  <section fxLayout="column" fxLayoutGap="20px">
+    <mat-form-field fxFlex>
+      <input matInput formControlName="alias" placeholder="Alias">
+      <mat-error>Bitte gebe einen Alias für die Disguise an.</mat-error>
+      <mat-hint>Der Alias wird in den Configs eingetragen.</mat-hint>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput formControlName="description" placeholder="Beschreibung">
+    </mat-form-field>
+  </section>
+  <section fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between start">
+    <button type="submit" [disabled]="formGroup.invalid || !disguise.skin || loading" mat-raised-button color="accent"
+      fxFlex>
+      <mat-icon>save</mat-icon>&nbsp;Speichern
+    </button>
+    <button mat-button mat-dialog-close fxFlex type="button">Abbrechen</button>
+  </section>
+  <br>
+  <br>
+  <mat-divider></mat-divider>
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  <br>
+  <section>
+    <mat-form-field>
+      <input matInput formControlName="skin_owner_name" placeholder="Skin Name">
+      <mat-error>{{getError()}}</mat-error>
+    </mat-form-field>
+    <button mat-button color="primary" type="button" [disabled]="!playerName.value || loading" (click)="generateSkin()">Generate
+      Skin</button>
+  </section>
+  <br>
+  <section *ngIf="disguise.skin" fxLayout="row" fxLayoutGap="20px">
+    <div fxFlex="40" fxLayout="column wrap">
+      <section fxLayout="column" fxFlex>
+        <mat-form-field fxFlex>
+          <input matInput formControlName="skin_owner" placeholder="Owner UUID">
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <input matInput formControlName="skin_texture" placeholder="Texture">
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <input matInput formControlName="skin_signature" placeholder="Signature">
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <input matInput formControlName="skin_url" placeholder="Skin URL">
+        </mat-form-field>
+      </section>
+    </div>
+    <div fxFlex>
+      <img *ngIf="disguise.skin?.imageUrl" [src]="disguise.skin.imageUrl">
+    </div>
+  </section>
+</form>

@@ -27,7 +27,7 @@ export class DisguisesTableComponent implements OnInit {
   dataSource: MatTableDataSource<Disguise>;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'alias', 'description', 'action'];
+  displayedColumns = ['head', 'id', 'alias', 'description', 'action'];
 
   constructor() {
     this.dataSource = new MatTableDataSource(this.models);

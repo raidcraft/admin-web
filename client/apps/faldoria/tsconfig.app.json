@@ -15,6 +15,7 @@
     "**/*.ts",
     "../../libs/items/src/index.ts",
     "../../libs/art/src/index.ts",
-    "../../libs/disguises/src/index.ts"
+    "../../libs/disguises/src/index.ts",
+    "../../libs/tags/src/index.ts"
   ]
 }

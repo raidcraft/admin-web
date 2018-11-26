@@ -33,6 +33,12 @@
       ],
       "@faldoria/disguises": [
         "libs/disguises/src/index.ts"
+      ],
+      "@faldoria/libs/tags/tags": [
+        "libs/libs/tags/tags/src/index.ts"
+      ],
+      "@faldoria/tags": [
+        "libs/tags/src/index.ts"
       ]
     }
   },

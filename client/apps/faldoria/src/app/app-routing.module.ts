@@ -30,6 +30,14 @@ export const routes: Route[] = [
       scopes: ['read:disguises']
     }
   },
+  {
+    path: 'tags',
+    loadChildren: '../../../../libs/tags/src/lib/tags.module#TagsModule',
+    canActivate: [ScopeGuard],
+    data: {
+      scopes: ['read:tags']
+    }
+  },
   { path: '**', redirectTo: 'home' }
 ];
 

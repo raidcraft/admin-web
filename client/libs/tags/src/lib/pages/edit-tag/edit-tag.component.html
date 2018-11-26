@@ -1,0 +1,4 @@
+<h2 mat-dialog-title>{{ editing ? tag.id + ' bearbeiten' : 'Neuer Tag'}}</h2>
+<mat-dialog-content>
+  <faldoria-tags-form [tag]="tag" [editing]="editing" (save)="onSave($event)"></faldoria-tags-form>
+</mat-dialog-content>

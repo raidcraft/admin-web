@@ -279,6 +279,62 @@
           }
         }
       }
+    },
+    "libs-tags-tags": {
+      "root": "libs/libs/tags/tags",
+      "sourceRoot": "libs/libs/tags/tags/src",
+      "projectType": "library",
+      "prefix": "faldoria",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/libs/tags/tags/tsconfig.lib.json",
+              "libs/libs/tags/tags/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/libs/tags/tags/jest.config.js",
+            "tsConfig": "libs/libs/tags/tags/tsconfig.spec.json",
+            "setupFile": "libs/libs/tags/tags/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "tags": {
+      "root": "libs/tags",
+      "sourceRoot": "libs/tags/src",
+      "projectType": "library",
+      "prefix": "faldoria",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/tags/tsconfig.lib.json",
+              "libs/tags/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/tags/jest.config.js",
+            "tsConfig": "libs/tags/tsconfig.spec.json",
+            "setupFile": "libs/tags/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
   "cli": {

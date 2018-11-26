@@ -1,0 +1,8 @@
+<section *ngIf="auth.userHasScopes('write:tags')">
+  <button mat-raised-button color="accent" (click)="openCreateTagDialog()">
+    <mat-icon>add</mat-icon>&nbsp;Neuer Tag
+  </button>
+  <mat-divider></mat-divider>
+  <br>
+</section>
+<faldoria-tags-table [models]="tags.tags$ | async" (delete)="onDelete($event)" (edit)="onEdit($event)"></faldoria-tags-table>

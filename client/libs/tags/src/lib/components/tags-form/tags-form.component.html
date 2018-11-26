@@ -1,0 +1,26 @@
+<form (submit)="saveTag()" [formGroup]="formGroup">
+  <section fxLayout="column" fxLayoutGap="10px">
+    <mat-form-field fxFlex>
+      <input matInput formControlName="id" placeholder="Tag ID">
+      <mat-error *ngIf="formGroup.get('id').hasError('existingTag') else tagError">
+        Es gibt bereits einen Tag mit dieser Id.
+      </mat-error>
+      <ng-template #tagError>
+        <mat-error>Bitte gebe eine eindeutige Tag ID an.</mat-error>
+      </ng-template>
+      <mat-hint>Die Tag ID wird in Quests verwendet.</mat-hint>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <textarea matInput formControlName="description" placeholder="Beschreibung"></textarea>
+      <mat-hint>Gib zum Beispiel an für was der Spieler den Tag erhält.</mat-hint>
+    </mat-form-field>
+  </section>
+  <br>
+  <br>
+  <section fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between start">
+    <button type="submit" [disabled]="formGroup.invalid" mat-raised-button color="accent" fxFlex>
+      <mat-icon>save</mat-icon>&nbsp;Speichern
+    </button>
+    <button mat-button mat-dialog-close fxFlex type="button">Abbrechen</button>
+  </section>
+</form>

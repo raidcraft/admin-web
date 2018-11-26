@@ -6,6 +6,7 @@
       <a mat-list-item routerLink="/items" *ngIf="auth.userHasScopes('read:items')">Items</a>
       <a mat-list-item routerLink="/art" *ngIf="auth.userHasScopes('read:art')">ART</a>
       <a mat-list-item routerLink="/disguises" *ngIf="auth.userHasScopes('read:disguises')">Disguises</a>
+      <a mat-list-item routerLink="/tags" *ngIf="auth.userHasScopes('read:tags')">Tags</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

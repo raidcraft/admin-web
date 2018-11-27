@@ -44,4 +44,12 @@ export class TagsTableComponent implements OnInit {
   deleteTag(tag: Tag) {
     this.delete.emit(tag);
   }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }

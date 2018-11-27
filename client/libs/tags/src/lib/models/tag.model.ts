@@ -6,7 +6,7 @@ export class Tag {
 
   constructor(data?: { id: string, description?: string }) {
     if (data) {
-      this.id = data.id;
+      this.id = data.id.toLowerCase();
       this.description = data.description;
     }
   }

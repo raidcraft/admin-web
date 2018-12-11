@@ -16,7 +16,9 @@ export class DisguisesService {
   constructor(private store: DisguisesStore,
     private http: HttpClient,
     private api: DisguisesApiService,
-    private query: DisguisesQueryService) { }
+    private query: DisguisesQueryService) {
+    this.load();
+  }
 
   delete(id: number) {
     this.api.delete(id).subscribe(result => {
@@ -54,9 +56,5 @@ export class DisguisesService {
     return this.http.get<any>(`https://api.mineskin.org/validate/user/${name}`).pipe(
       map(json => json.uuid)
     );
-  }
-
-  load() {
-    this.api.getAll().pipe(take(1)).subscribe(data => this.store.set(data));
   }
 }

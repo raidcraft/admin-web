@@ -43,7 +43,11 @@ export const routes: Route[] = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { initialNavigation: 'enabled' })],
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabled',
+      paramsInheritanceStrategy: 'always',
+      enableTracing: true
+    })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

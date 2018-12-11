@@ -14,13 +14,13 @@ import {
 } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxsModule } from '@ngxs/store';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoreModule, AuthService } from '@faldoria/core';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HomeComponent } from './layout/home/home.component';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 
 export function jwtOptionsFactory(auth: AuthService) {
   return {
@@ -29,6 +29,13 @@ export function jwtOptionsFactory(auth: AuthService) {
     },
     whitelistedDomains: ['localhost:3000', 'localhost:4200', 'api.faldoria.de', 'faldoria.de']
   }
+}
+
+import { enableAkitaProdMode } from '@datorama/akita';
+import { environment } from '@faldoria/env';
+
+if (environment.production) {
+  enableAkitaProdMode();
 }
 
 @NgModule({
@@ -47,8 +54,8 @@ export function jwtOptionsFactory(auth: AuthService) {
       }
     }),
     NgxsModule.forRoot([]),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsRouterPluginModule.forRoot(),
+    AkitaNgDevtools.forRoot(),
+    AkitaNgRouterStoreModule.forRoot(),
     CoreModule,
     MatToolbarModule,
     MatButtonModule,

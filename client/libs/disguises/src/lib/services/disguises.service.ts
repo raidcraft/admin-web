@@ -1,32 +1,43 @@
-import { Injectable } from '@angular/core';
-import { DisguisesStore } from '../store/disguises.store';
-import { Disguise, MineSkin, Skin } from '../models';
-import { Observable } from 'rxjs';
-import { Select, Store } from '@ngxs/store';
-import { UpdateDisguiseAction, CreateDisguiseAction, DeleteDisguiseAction } from '../store';
-import { take, map, switchMap, filter } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { Disguise, Skin } from '../models';
+import { DisguisesQueryService, DisguisesStore } from '../store';
+import { DisguisesApiService } from './disguises-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DisguisesService {
 
-  @Select(DisguisesStore.disguises)
-  public models$: Observable<Disguise[]>;
+  public disguises$ = this.query.selectAll();
 
-  constructor(private store: Store, private http: HttpClient) { }
+  constructor(private store: DisguisesStore,
+    private http: HttpClient,
+    private api: DisguisesApiService,
+    private query: DisguisesQueryService) { }
 
   delete(id: number) {
-    return this.store.dispatch(new DeleteDisguiseAction(id)).pipe(take(1));
+    this.api.delete(id).subscribe(result => {
+      this.store.remove(result.id)
+    });
   }
 
   create(model: Disguise) {
-    return this.store.dispatch(new CreateDisguiseAction(model)).pipe(take(1));
+    this.api.create(model).subscribe(result => {
+      this.store.add(result)
+    });
   }
 
   update(model: Disguise) {
-    return this.store.dispatch(new UpdateDisguiseAction(model)).pipe(take(1));
+    this.api.update(model.id, model).subscribe(result => {
+      this.store.update(result.id, result)
+    });
+  }
+
+  getDisguise(id: number) {
+    return this.query.selectEntity(id);
   }
 
   generateSkin(name: string): Observable<Skin> {

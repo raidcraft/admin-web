@@ -47,8 +47,11 @@
         </mat-form-field>
       </section>
     </div>
-    <div fxFlex>
-      <img *ngIf="disguise.skin?.imageUrl" [src]="disguise.skin.imageUrl">
+    <div *ngIf="disguise" fxFlex>
+      <img *ngIf="disguise.skin?.imageUrl else noskin" [src]="disguise.skin.imageUrl">
+      <ng-template #noskin>
+        <mat-error>No valid SKIN found!</mat-error>
+      </ng-template>
     </div>
   </section>
 </form>

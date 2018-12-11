@@ -39,7 +39,6 @@ export const MATERIAL_IMPORTS = [
     ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
-    AkitaNgDevtools.forRoot(),
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: TagsComponent }
     ])

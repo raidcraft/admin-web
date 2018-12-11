@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Disguise } from '../../models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'faldoria-disguises-table',
@@ -29,7 +30,7 @@ export class DisguisesTableComponent implements OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['head', 'id', 'alias', 'description', 'action'];
 
-  constructor() {
+  constructor(private router: Router) {
     this.dataSource = new MatTableDataSource(this.models);
   }
 
@@ -46,8 +47,12 @@ export class DisguisesTableComponent implements OnInit {
     }
   }
 
-  editDisguise(id: number) {
+  viewDisguise(id: number) {
+    this.router.navigate([`${id}`]);
+  }
 
+  editDisguise(id: number) {
+    this.router.navigate([`${id}/edit`]);
   }
 
   deleteDisguise(id: number) {

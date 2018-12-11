@@ -1,0 +1,5 @@
+<button mat-button [routerLink]="['..']">
+  <mat-icon>arrow_back</mat-icon>&nbsp;Zurück
+</button>
+<br><br>
+<faldoria-disguise-view (delete)="onDelete($event)" [disguise]="disguise$ | async"></faldoria-disguise-view>

@@ -20,7 +20,7 @@
     <!-- Alias Column -->
     <ng-container matColumnDef="alias">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Alias</th>
-      <td mat-cell *matCellDef="let row">{{row.alias}}</td>
+      <td mat-cell *matCellDef="let row"><a [routerLink]="[row.id]">{{row.alias}}</a></td>
     </ng-container>
 
     <!-- Description Column -->
@@ -34,11 +34,14 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
         <mat-menu #appMenu="matMenu">
-          <button disabled mat-menu-item (click)="editDisguise(row.id)">
-            <mat-icon>edit</mat-icon> Bearbeiten
+          <button mat-menu-item [routerLink]="[row.id]">
+            <mat-icon>visibility</mat-icon>&nbsp;Ansehen
           </button>
+          <!-- <button mat-menu-item (click)="editDisguise(row.id)">
+            <mat-icon>edit</mat-icon> Bearbeiten
+          </button> -->
           <button mat-menu-item color="danger" (click)="deleteDisguise(row.id)">
-            <mat-icon>delete</mat-icon> Löschen
+            <mat-icon>delete</mat-icon>&nbsp;Löschen
           </button>
         </mat-menu>
 

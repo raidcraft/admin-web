@@ -5,4 +5,4 @@
   <mat-divider></mat-divider>
   <br>
 </section>
-<faldoria-disguises-table [models]="disguises.models$ | async" (delete)="onDelete($event)" (create)="onCreate($event)"></faldoria-disguises-table>
+<faldoria-disguises-table [models]="disguises.disguises$ | async" (delete)="onDelete($event)" (create)="onCreate($event)"></faldoria-disguises-table>

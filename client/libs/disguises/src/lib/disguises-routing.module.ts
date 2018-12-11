@@ -1,9 +1,24 @@
 import { RouterModule, Route } from "@angular/router";
 import { NgModule } from "@angular/core";
-import { DisguisesComponent } from "./pages";
+import { DisguisesComponent, ViewDisguiseComponent, EditDisguiseComponent, DisguiseResolver } from "./pages";
 
 export const routes: Route[] = [
-  { path: '', component: DisguisesComponent }
+  {
+    path: '',
+    component: DisguisesComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: ':id',
+    component: ViewDisguiseComponent,
+    resolve: {
+      disguise: DisguiseResolver
+    }
+  },
+  {
+    path: 'edit/:id',
+    component: EditDisguiseComponent
+  }
 ];
 
 @NgModule({

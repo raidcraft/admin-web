@@ -2,15 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DisguisesComponent } from './pages/disguises/disguises.component';
 import { DisguisesRoutingModule } from './disguises-routing.module';
-import { DisguisesTableComponent } from './components';
-import { MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule, MatIconModule, MatTabsModule, MatTooltipModule, MatDividerModule, MatMenuModule, MatButton, MatButtonModule, MatDialogModule, MatCheckboxModule, MatSelectModule, MatCardModule, MatStepperModule, MatProgressSpinnerModule, MatProgressBarModule } from '@angular/material';
+import { DisguisesTableComponent, DisguiseFormComponent, DisguiseViewComponent } from './components';
+import { MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule, MatIconModule, MatTabsModule, MatTooltipModule, MatDividerModule, MatMenuModule, MatButton, MatButtonModule, MatDialogModule, MatCheckboxModule, MatSelectModule, MatCardModule, MatStepperModule, MatProgressSpinnerModule, MatProgressBarModule, MatSnackBarModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
-import { NgxsModule } from '@ngxs/store';
-import { DisguisesStore } from './store';
-import { CreateDisguiseComponent } from './pages/create-disguise/create-disguise.component';
-import { DisguiseFormComponent } from './components/disguise-form/disguise-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CreateDisguiseComponent, ViewDisguiseComponent, EditDisguiseComponent } from './pages';
+import { ClipboardModule } from 'ngx-clipboard';
 
 export const MATERIAL_IMPORTS = [
   MatTableModule,
@@ -30,7 +28,8 @@ export const MATERIAL_IMPORTS = [
   MatCardModule,
   MatStepperModule,
   MatProgressSpinnerModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatSnackBarModule
 ];
 
 @NgModule({
@@ -40,17 +39,21 @@ export const MATERIAL_IMPORTS = [
     FlexLayoutModule,
     FormsModule,
     DisguisesRoutingModule,
-    ...MATERIAL_IMPORTS,
-    NgxsModule.forFeature([DisguisesStore])
+    ClipboardModule,
+    ...MATERIAL_IMPORTS
   ],
   declarations: [
     DisguisesComponent,
     DisguisesTableComponent,
     CreateDisguiseComponent,
-    DisguiseFormComponent
+    DisguiseFormComponent,
+    ViewDisguiseComponent,
+    EditDisguiseComponent,
+    DisguiseViewComponent
   ],
   entryComponents: [
-    CreateDisguiseComponent
+    CreateDisguiseComponent,
+    ViewDisguiseComponent
   ]
 })
 export class DisguisesModule { }

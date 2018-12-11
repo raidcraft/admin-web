@@ -57,4 +57,8 @@ export class DisguisesService {
       map(json => json.uuid)
     );
   }
+
+  load() {
+    this.api.getAll().pipe(take(1)).subscribe(data => this.store.set(data));
+  }
 }

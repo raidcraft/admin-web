@@ -15,7 +15,6 @@ export class DisguisesComponent implements OnInit {
   constructor(public disguises: DisguisesService, private dialog: MatDialog, public auth: AuthService) { }
 
   ngOnInit() {
-    this.disguises.load();
   }
 
   onDelete(id: number) {

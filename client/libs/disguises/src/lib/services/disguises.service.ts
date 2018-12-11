@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { Disguise, Skin } from '../models';
 import { DisguisesQueryService, DisguisesStore } from '../store';
 import { DisguisesApiService } from './disguises-api.service';
@@ -54,5 +54,9 @@ export class DisguisesService {
     return this.http.get<any>(`https://api.mineskin.org/validate/user/${name}`).pipe(
       map(json => json.uuid)
     );
+  }
+
+  load() {
+    this.api.getAll().pipe(take(1)).subscribe(data => this.store.set(data));
   }
 }

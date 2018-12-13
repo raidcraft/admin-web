@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { RCItem, RCEquipment, RCArmor, RCWeapon } from '../models';
 import { RCITEM_MOCK_DATA } from '../models/items.mock-data';
 import { map } from 'rxjs/operators';
+import { RCConsumeable } from '../models/consumeable.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,8 @@ export class ItemsApiService {
         return new RCArmor(data);
       case "EQUIPMENT":
         return new RCEquipment(data);
+      case "CONSUMEABLE":
+        return new RCConsumeable(data);
       default:
         return new RCItem(data);
     }
@@ -58,6 +61,8 @@ export class ItemsApiService {
         return new RCArmor({ ...data.equipment, ...data.equipment.armor, ...data });
       case 'WEAPON':
         return new RCWeapon({ ...data.equipment, ...data.equipment.weapon, ...data });
+      case 'CONSUMEABLE':
+        return new RCConsumeable({ ...data.consumeable, ...data });
       default:
         return new RCItem(data);
     }

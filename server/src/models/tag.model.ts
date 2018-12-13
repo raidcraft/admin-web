@@ -9,6 +9,7 @@ export interface ITagAddModel {
 export interface ITagModel extends Sequelize.Model<ITagModel, ITagAddModel> {
   id: string;
   description: string;
+  auto_generated: boolean;
 }
 
 export const Tags = sequelize.define<ITagModel, ITagAddModel>('rc_tags', {
@@ -17,4 +18,8 @@ export const Tags = sequelize.define<ITagModel, ITagAddModel>('rc_tags', {
     primaryKey: true,
   },
   description: Sequelize.STRING,
+  auto_generated: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
 });

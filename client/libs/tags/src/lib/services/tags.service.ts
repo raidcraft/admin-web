@@ -10,7 +10,8 @@ import { take } from "rxjs/operators";
 })
 export class TagsService extends QueryEntity<TagsState, Tag> {
 
-  tags$ = this.selectAll();
+  tags$ = this.selectAll({ filterBy: (tag => !tag.auto_generated) });
+  autoTags$ = this.selectAll({ filterBy: (tag => tag.auto_generated) })
 
   constructor(protected store: TagsStore, private api: TagsApiService) {
     super(store);

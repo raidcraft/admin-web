@@ -16,7 +16,7 @@
       <rci-edit-item-properties [item]="item" [parentForm]="formGroup"></rci-edit-item-properties>
     </mat-tab>
     <mat-tab label="Attribute" [disabled]="!isEquipment" matTooltip="Nur Ausrüstungsgegenstände können Attribute besitzen.">
-      <rci-edit-item-attributes [item]="item" [parentForm]="formGroup"></rci-edit-item-attributes>
+      <rci-edit-item-attributes *ngIf="isEquipment" [item]="item" [parentForm]="formGroup"></rci-edit-item-attributes>
     </mat-tab>
   </mat-tab-group>
 </form>

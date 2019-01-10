@@ -5,4 +5,12 @@
   <mat-divider></mat-divider>
   <br>
 </section>
-<faldoria-tags-table [models]="tags.tags$ | async" (delete)="onDelete($event)" (edit)="onEdit($event)"></faldoria-tags-table>
+
+<mat-tab-group>
+  <mat-tab label="Manuelle Tags">
+    <faldoria-tags-table [models]="tags.tags$ | async" (delete)="onDelete($event)" (edit)="onEdit($event)"></faldoria-tags-table>
+  </mat-tab>
+  <mat-tab label="Automatische Tags">
+    <faldoria-tags-table [models]="tags.autoTags$ | async"></faldoria-tags-table>
+  </mat-tab>
+</mat-tab-group>

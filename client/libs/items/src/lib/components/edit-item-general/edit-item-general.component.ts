@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Host } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, ControlContainer, FormGroupDirective, AbstractControl } from '@angular/forms';
-import { RCItem, ItemType, ItemQuality, ItemBindType, keyFromValue, MinecraftItem, ArmorType, WeaponType, EquipmentSlot } from '../../models';
+import { RCItem, ItemType, ItemQuality, ItemBindType, keyFromValue, MinecraftItem, ArmorType, WeaponType, EquipmentSlot, RCEquipment, RCArmor, RCWeapon } from '../../models';
 import { ItemsService } from '../../services';
 import { MatSelectChange } from '@angular/material';
 import { map } from 'rxjs/operators';
@@ -82,7 +82,10 @@ export class EditItemGeneralComponent implements OnInit {
         minecraftItem: this.item.minecraftItem,
         quality: this.item.quality,
         bindType: this.item.bindType,
-        itemType: this.item.itemType
+        itemType: this.item.itemType,
+        equipmentSlot: this.isEquipment ? (this.item as RCEquipment).equipmentSlot : null,
+        armorType: this.isArmor ? (this.item as RCArmor).armorType : null,
+        weaponType: this.isWeapon ? (this.item as RCWeapon).weaponType : null
       });
     }
   }

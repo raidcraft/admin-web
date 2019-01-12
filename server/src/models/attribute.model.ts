@@ -38,4 +38,4 @@ Equipment.hasMany(Attributes, {
   hooks: true
 });
 
-Attributes.belongsTo(Equipment);
+Attributes.belongsTo(Equipment, { foreignKey: 'equipment_id' });

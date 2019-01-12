@@ -65,4 +65,4 @@ Items.hasOne(Consumeable, {
   hooks: true
 });
 
-Consumeable.belongsTo(Items);
+Consumeable.belongsTo(Items, { foreignKey: 'item_id' });

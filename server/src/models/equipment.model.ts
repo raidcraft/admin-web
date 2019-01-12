@@ -41,4 +41,4 @@ Items.hasOne(Equipment, {
   hooks: true
 });
 
-Equipment.belongsTo(Items);
+Equipment.belongsTo(Items, { foreignKey: 'item_id' });

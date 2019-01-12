@@ -49,4 +49,4 @@ Equipment.hasOne(Weapon, {
   hooks: true
 });
 
-Weapon.belongsTo(Equipment);
+Weapon.belongsTo(Equipment, { foreignKey: 'equipment_id' });

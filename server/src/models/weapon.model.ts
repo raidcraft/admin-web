@@ -46,14 +46,7 @@ Equipment.hasOne(Weapon, {
   foreignKey: 'equipment_id',
   as: 'weapon',
   onDelete: 'CASCADE',
-  hooks: true,
-  constraints: true
+  hooks: true
 });
 
-Weapon.belongsTo(Equipment, {
-  foreignKey: 'equipment_id',
-  as: 'weapon',
-  onDelete: 'CASCADE',
-  hooks: true,
-  constraints: true
-});
+Weapon.belongsTo(Equipment);

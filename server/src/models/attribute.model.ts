@@ -32,18 +32,10 @@ export const Attributes = sequelize.define<IAttributeModel, IAttributeAddModel>(
 });
 
 Equipment.hasMany(Attributes, {
-  foreignKey: {
-    name: 'equipment_id',
-    allowNull: false
-  },
+  foreignKey: 'equipment_id',
   as: 'attributes',
-  onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
+  hooks: true
 });
 
-Attributes.belongsTo(Equipment, {
-  foreignKey: {
-    name: 'equipment_id'
-  },
-  as: 'attributes',
-  onDelete: 'CASCADE'
-});
+Attributes.belongsTo(Equipment);

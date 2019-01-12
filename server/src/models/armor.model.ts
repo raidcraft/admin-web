@@ -37,13 +37,6 @@ Equipment.hasOne(Armor, {
   as: 'armor',
   onDelete: 'CASCADE',
   hooks: true,
-  constraints: true
 });
 
-Armor.belongsTo(Equipment, {
-  foreignKey: 'equipment_id',
-  as: 'armor',
-  onDelete: 'CASCADE',
-  hooks: true,
-  constraints: true
-});
+Armor.belongsTo(Equipment);

@@ -59,18 +59,15 @@ export const Consumeable = sequelize.define<IConsumeableModel, IConsumeableAddMo
 });
 
 Items.hasOne(Consumeable, {
-  foreignKey: {
-    name: 'item_id',
-    allowNull: false
-  },
+  foreignKey: 'item_id',
   as: 'consumeable',
-  onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
+  constraints: true
 });
 
 Consumeable.belongsTo(Items, {
-  foreignKey: {
-    name: 'item_id',
-  },
+  foreignKey: 'item_id',
   as: 'consumeable',
-  onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
+  constraints: true
 });

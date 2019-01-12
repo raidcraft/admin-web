@@ -35,18 +35,15 @@ export const Equipment = sequelize.define<IEquipmentModel, IEquipmentAddModel>('
 });
 
 Items.hasOne(Equipment, {
-  foreignKey: {
-    name: 'item_id',
-    allowNull: false
-  },
+  foreignKey: 'item_id',
   as: 'equipment',
-  onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
+  constraints: true
 });
 
 Equipment.belongsTo(Items, {
-  foreignKey: {
-    name: 'item_id',
-  },
+  foreignKey: 'item_id',
   as: 'equipment',
-  onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
+  constraints: true
 });

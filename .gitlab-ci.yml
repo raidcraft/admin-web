@@ -23,6 +23,7 @@ build-client:
     - docker push "$CI_REGISTRY_IMAGE/client:$CI_COMMIT_REF_SLUG"
   except:
     - master
+    - tags
 
 
 build-server-master:
@@ -40,6 +41,7 @@ build-server:
     - docker push "$CI_REGISTRY_IMAGE/server:$CI_COMMIT_REF_SLUG"
   except:
     - master
+    - tags
 
 build-client-tag:
   stage: build

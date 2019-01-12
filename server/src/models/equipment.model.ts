@@ -38,12 +38,14 @@ Items.hasOne(Equipment, {
   foreignKey: 'item_id',
   as: 'equipment',
   onDelete: 'CASCADE',
-  constraints: true
+  constraints: true,
+  hooks: true
 });
 
 Equipment.belongsTo(Items, {
   foreignKey: 'item_id',
   as: 'equipment',
   onDelete: 'CASCADE',
-  constraints: true
+  constraints: true,
+  hooks: true
 });

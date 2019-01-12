@@ -62,12 +62,14 @@ Items.hasOne(Consumeable, {
   foreignKey: 'item_id',
   as: 'consumeable',
   onDelete: 'CASCADE',
-  constraints: true
+  constraints: true,
+  hooks: true
 });
 
 Consumeable.belongsTo(Items, {
   foreignKey: 'item_id',
   as: 'consumeable',
   onDelete: 'CASCADE',
-  constraints: true
+  constraints: true,
+  hooks: true
 });

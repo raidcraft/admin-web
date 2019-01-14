@@ -40,6 +40,11 @@ export class ItemFormComponent implements OnInit {
     this.formGroup = this.fb.group({
       itemLevel: this.fb.control(1, Validators.required)
     });
+    if (!isNullOrUndefined(this.item)) {
+      this.formGroup.patchValue({
+        itemLevel: this.item.itemLevel
+      });
+    }
   }
 
   saveItem() {

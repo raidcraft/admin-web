@@ -22,7 +22,11 @@ export class EditWeaponPropertiesComponent implements OnInit {
     this.parentForm.addControl('weapon', this.initForm());
     this.formGroup = this.parentForm.get('weapon') as FormGroup;
     if (!isNullOrUndefined(this.item)) {
-      this.formGroup.patchValue(this.item.toFormFormat().weapon);
+      this.formGroup.patchValue({
+        minDamage: this.item.minDamage,
+        maxDamage: this.item.maxDamage,
+        swingTime: this.item.swingTime
+      });
     }
   }
 

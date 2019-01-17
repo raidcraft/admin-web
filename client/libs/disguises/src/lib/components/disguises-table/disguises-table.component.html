@@ -37,9 +37,9 @@
           <button mat-menu-item [routerLink]="[row.id]">
             <mat-icon>visibility</mat-icon>&nbsp;Ansehen
           </button>
-          <!-- <button mat-menu-item (click)="editDisguise(row.id)">
-            <mat-icon>edit</mat-icon> Bearbeiten
-          </button> -->
+          <a mat-menu-item [download]="row.alias + '.png'" [href]="row.skin?.textureUrl">
+            <mat-icon>save_alt</mat-icon>&nbsp;Download
+          </a>
           <button mat-menu-item color="danger" (click)="deleteDisguise(row.id)">
             <mat-icon>delete</mat-icon>&nbsp;Löschen
           </button>

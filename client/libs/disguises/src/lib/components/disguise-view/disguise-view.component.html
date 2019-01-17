@@ -12,6 +12,9 @@
     <button mat-button ngxClipboard [cbContent]="url" (click)="copyUrl()" type="button">
       <mat-icon>share</mat-icon>&nbsp;SHARE
     </button>
+    <a mat-button [download]="disguise.alias + '.png'" [href]="disguise.skin?.textureUrl">
+      <mat-icon>save_alt</mat-icon>&nbsp;DOWNLOAD
+    </a>
     <button mat-button color="warn" (click)="deleteDisguise()">
       <mat-icon>delete</mat-icon>&nbsp;DELETE
     </button>

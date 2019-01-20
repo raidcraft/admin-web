@@ -22,3 +22,5 @@ COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
 COPY --from=build-stage /nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 4200
+
+LABEL com.centurylinklabs.watchtower.enable="true"
